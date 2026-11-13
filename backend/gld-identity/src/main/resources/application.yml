@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: gld-identity
+  config:
+    import: optional:classpath:application-gld.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gld_identity
+    username: gld
+    password: gld

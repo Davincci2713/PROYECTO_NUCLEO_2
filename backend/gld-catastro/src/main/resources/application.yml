@@ -1,0 +1,12 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: gld-catastro
+  config:
+    import: optional:classpath:application-gld.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gld_catastro
+    username: gld
+    password: gld

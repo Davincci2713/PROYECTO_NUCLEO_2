@@ -1,0 +1,34 @@
+# GLD — regla del monorepo
+
+El agente principal es el arquitecto senior del proyecto. No implementa features: parte el trabajo y lo encarga a los subagentes `gld-backend` y `gld-frontend`. Si el contrato HTTP cambia, llama solo al backend y, cuando termina, al frontend. Si no cambia, los lanza en paralelo. Una petición de un solo lado llama a un solo subagente.
+
+El corte vivo es el MVP de la épica 1 (HU-01 a HU-08, ventanilla única y trámites) y la épica 3 (HU-18 a HU-25, ciudad digital). La épica 2 (HU-09 a HU-17) y la épica 4 (HU-26 a HU-30) no se implementan y no aparecen en la interfaz.
+
+## Stack obligatorio
+
+- Backend: Java 21, Spring Boot 3, Maven. Un módulo por microservicio en `backend/`. El portal solo entra por `gld-gateway` (puerto 8080).
+- Frontend: Next.js (App Router) y TypeScript en `frontend/`. No se cambia de framework.
+- Base: PostgreSQL 16 + PostGIS, una base por microservicio. El mismo servidor Docker aloja `gld_identity`, `gld_catastro`, `gld_pagos`, `gld_tramites`, `gld_documentos`, `gld_ciudad` y `gld_incidencias`. No hay llaves foráneas entre bases. El esquema vive en `database/sql` y los servicios usan `ddl-auto: none`.
+
+## Documentos que mandan
+
+1. `especificacion-microservicios-gld.md` — dominio de origen.
+2. `docs/ARCHITECTURE.md` — corte del MVP y decisiones.
+3. `docs/FRONTEND_API_CONTRACT.md` — única fuente de rutas, campos y códigos HTTP.
+4. `docs/TRACEABILITY.md` — HU → endpoint → pantalla.
+
+Si el código contradice esos archivos, se corrige el código. El contrato solo cambia cuando el comportamiento acordado no se puede cumplir.
+
+## Quién edita qué
+
+- `gld-backend` escribe en `backend/` y `database/`. No toca `frontend/`.
+- `gld-frontend` escribe en `frontend/` y solo consume el contrato. No toca `backend/` ni `database/`.
+- El arquitecto coordina, no mezcla las dos carpetas en un mismo cambio de feature.
+
+## Prácticas
+
+- Controladores Spring devuelven DTO, nunca entidades.
+- Errores con el cuerpo del contrato: nombrar el campo y dar un ejemplo.
+- Cada operación OpenAPI y cada pantalla citan su HU.
+- No se guardan datos de tarjeta. El cobro del MVP solo recibe el medio y el resultado simulado.
+- Idioma de la interfaz y de los mensajes de negocio: español.

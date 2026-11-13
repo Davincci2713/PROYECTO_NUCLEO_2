@@ -1,0 +1,11 @@
+backend/**/target/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+*.log
+.env
+.env.local
+.idea/
+*.iml
+.DS_Store
+database/pgdata/

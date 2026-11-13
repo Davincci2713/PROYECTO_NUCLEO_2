@@ -1,0 +1,12 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: gld-incidencias
+  config:
+    import: optional:classpath:application-gld.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gld_incidencias
+    username: gld
+    password: gld

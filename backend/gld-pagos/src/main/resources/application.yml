@@ -1,0 +1,12 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: gld-pagos
+  config:
+    import: optional:classpath:application-gld.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gld_pagos
+    username: gld
+    password: gld

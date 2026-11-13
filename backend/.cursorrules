@@ -1,0 +1,14 @@
+# Backend GLD
+
+Microservicios Java 21 y Spring Boot 3, un proceso por contexto. El MVP cubre la épica 1 (HU-01..HU-08) y la épica 3 (HU-18..HU-25).
+
+- Paquetes `mx.gob.gld.<contexto>`. Capas `web`, `application`, `domain`, `infrastructure`.
+- Los controladores devuelven records DTO. Nunca entidades JPA.
+- `spring.jpa.hibernate.ddl-auto=none`. El esquema sale de `database/sql`.
+- Una base por servicio: `gld_identity`, `gld_catastro`, `gld_pagos`, `gld_tramites`, `gld_documentos`, `gld_ciudad`, `gld_incidencias`. Sin llaves foráneas entre bases. Cada servicio filtra por `tenant_id`.
+- Errores con el cuerpo de `docs/FRONTEND_API_CONTRACT.md`. Mensajes que nombran el campo y un ejemplo (H-04).
+- OpenAPI en cada servicio. `@Tag` y `@Operation` citan la HU.
+- JWT compartido, sin sesión de servidor. El header `X-Tenant-ID` es obligatorio salvo salud pública.
+- No guardes PAN, CVV ni datos de tarjeta (RNF-07). El cobro solo recibe el medio y el resultado simulado.
+- Pruebas de dominio para predial (2 %), multa (50 % a 10 días), expiración de 72 h, voto único y filtro de chat. JaCoCo exige al menos 80 % de cobertura de líneas en cada módulo JAR, excluyendo solo las clases *Application, y `mvn test` lo comprueba.
+- No edites `frontend/`.

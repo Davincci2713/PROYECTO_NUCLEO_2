@@ -1,0 +1,212 @@
+x-jvm: &jvm
+  JAVA_TOOL_OPTIONS: -Xmx256m
+
+x-credenciales: &credenciales
+  SPRING_DATASOURCE_USERNAME: gld
+  SPRING_DATASOURCE_PASSWORD: gld
+
+x-servicios: &servicios
+  GLD_SERVICES_IDENTITY: http://gld-identity:8081
+  GLD_SERVICES_CATASTRO: http://gld-catastro:8082
+  GLD_SERVICES_PAGOS: http://gld-pagos:8083
+  GLD_SERVICES_TRAMITES: http://gld-tramites:8084
+  GLD_SERVICES_DOCUMENTOS: http://gld-documentos:8085
+  GLD_SERVICES_CIUDAD: http://gld-ciudad-digital:8086
+  GLD_SERVICES_INCIDENCIAS: http://gld-incidencias:8087
+
+x-salud-java: &salud-java
+  interval: 10s
+  timeout: 5s
+  retries: 18
+  start_period: 60s
+
+x-build-java: &build-java
+  context: ./backend
+  dockerfile: Dockerfile
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: gld-postgres
+    environment:
+      POSTGRES_DB: gld_identity
+      POSTGRES_USER: gld
+      POSTGRES_PASSWORD: gld
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/sql:/docker-entrypoint-initdb.d:ro
+      - gld-data:/var/lib/postgresql/data
+    healthcheck:
+      # identity.usuarios aparece al inicio del script; bitácora de incidencias es lo último.
+      # Así no queda sano mientras docker-entrypoint-initdb.d sigue aplicando el resto.
+      test:
+        [
+          "CMD-SHELL",
+          "psql -U gld -d gld_identity -c 'SELECT 1 FROM identity.usuarios LIMIT 1' && psql -U gld -d gld_incidencias -c 'SELECT 1 FROM public.bitacora LIMIT 0'",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      start_period: 15s
+
+  gld-identity:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-identity
+    environment:
+      <<: [*jvm, *credenciales, *servicios]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_identity
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8081/actuator/health"]
+
+  gld-catastro:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-catastro
+    environment:
+      <<: [*jvm, *credenciales]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_catastro
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8082/actuator/health"]
+
+  gld-pagos:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-pagos
+    environment:
+      <<: [*jvm, *credenciales, *servicios]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_pagos
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8083/actuator/health"]
+
+  gld-tramites:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-tramites
+    environment:
+      <<: [*jvm, *credenciales, *servicios]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_tramites
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8084/actuator/health"]
+
+  gld-documentos:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-documentos
+    environment:
+      <<: [*jvm, *credenciales]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_documentos
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8085/actuator/health"]
+
+  gld-ciudad-digital:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-ciudad-digital
+    environment:
+      <<: [*jvm, *credenciales, *servicios]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_ciudad
+    ports:
+      - "8086:8086"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8086/actuator/health"]
+
+  gld-incidencias:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-incidencias
+    environment:
+      <<: [*jvm, *credenciales]
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gld_incidencias
+    ports:
+      - "8087:8087"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8087/actuator/health"]
+
+  gld-gateway:
+    build:
+      <<: *build-java
+      args:
+        MODULO: gld-gateway
+    environment:
+      <<: [*jvm, *servicios]
+    ports:
+      - "8080:8080"
+    depends_on:
+      gld-identity:
+        condition: service_healthy
+      gld-catastro:
+        condition: service_healthy
+      gld-pagos:
+        condition: service_healthy
+      gld-tramites:
+        condition: service_healthy
+      gld-documentos:
+        condition: service_healthy
+      gld-ciudad-digital:
+        condition: service_healthy
+      gld-incidencias:
+        condition: service_healthy
+    healthcheck:
+      <<: *salud-java
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/actuator/health"]
+
+  portal:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      gld-gateway:
+        condition: service_healthy
+
+volumes:
+  gld-data:

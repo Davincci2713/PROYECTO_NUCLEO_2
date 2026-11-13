@@ -1,0 +1,38 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+gld:
+  jwt:
+    secret: gld-dev-secret-cambia-en-produccion-32b
+    session-seconds: 3600
+    pre-token-seconds: 300
+  internal-token: gld-dev-internal
+  sello-secret: gld-sello-demo
+  verificacion-base: http://localhost:3000/verificar
+  services:
+    identity: http://localhost:8081
+    catastro: http://localhost:8082
+    pagos: http://localhost:8083
+    tramites: http://localhost:8084
+    documentos: http://localhost:8085
+    ciudad: http://localhost:8086
+    incidencias: http://localhost:8087
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

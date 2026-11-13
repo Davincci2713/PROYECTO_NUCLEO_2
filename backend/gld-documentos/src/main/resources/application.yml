@@ -1,0 +1,12 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: gld-documentos
+  config:
+    import: optional:classpath:application-gld.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gld_documentos
+    username: gld
+    password: gld

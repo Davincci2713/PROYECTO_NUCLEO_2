@@ -1,0 +1,11 @@
+# Frontend GLD
+
+Portal Next.js (App Router) y TypeScript. Única base HTTP: el gateway `http://localhost:8080`.
+
+- Lee `docs/FRONTEND_API_CONTRACT.md`. No inventes campos ni rutas.
+- Español en toda la interfaz. Ancho usable desde 360 px. Contraste y etiquetas asociadas a cada control.
+- Cada pantalla de historia lleva `data-hu="HU-xx"`.
+- Formularios de trámite: importe y concepto siempre visibles (H-01), volver al paso anterior sin perder datos (H-02), pasos numerados (H-03), error con campo y ejemplo (H-04), folio con botón Copiar (H-05).
+- El mapa de incidencias es esquemático. El clic calcula lat/lng, pide la dirección de referencia y deja editarla (H-06).
+- Token en `sessionStorage`. Envía `Authorization` y `X-Tenant-ID: 05021`.
+- No edites `backend/`, `database/` ni `docs/`.

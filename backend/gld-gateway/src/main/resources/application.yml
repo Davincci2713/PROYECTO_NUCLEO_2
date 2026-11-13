@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gld-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "GET,POST,PUT,DELETE,OPTIONS"
+            allowedHeaders: "Authorization,Content-Type,X-Tenant-ID,Accept"
+            allowCredentials: true
+
+gld:
+  services:
+    identity: http://localhost:8081
+    catastro: http://localhost:8082
+    pagos: http://localhost:8083
+    tramites: http://localhost:8084
+    documentos: http://localhost:8085
+    ciudad: http://localhost:8086
+    incidencias: http://localhost:8087
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

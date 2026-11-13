@@ -1,0 +1,1826 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ventanilla San Rafael</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: app shell institucional — barra superior fija, columna central de 1000px, rieles de pasos en los flujos */
+:root{
+  --bg:#EEF1EF; --surface:#FFFFFF; --surface-2:#F7F9F7; --ink:#13212A; --ink-2:#4A5C66;
+  --line:#D7DEDA; --green:#0E6B4F; --green-ink:#0A513C; --green-soft:#E3F0EA;
+  --ochre:#A4650C; --ochre-soft:#FBF0DC; --red:#A3281F; --red-soft:#FBE7E4;
+  --blue:#1A4E7A; --blue-soft:#E4EDF5;
+  --on-green:#FFFFFF; --on-green-ink:#FFFFFF;
+  --bar:#0A513C; --bar-ink:#EAF4EF; --bar-sub:#9CC6B4; --bar-dim:#CFE6DB;
+  --radius:10px; --shadow:0 1px 2px rgba(19,33,42,.06),0 8px 24px -14px rgba(19,33,42,.28);
+  --display:'Archivo',ui-sans-serif,system-ui,sans-serif;
+  --body:'Source Sans 3',ui-sans-serif,system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1519; --surface:#16212A; --surface-2:#1C2A33; --ink:#E6EDF0; --ink-2:#9DB0BA;
+  --line:#27373F; --green:#3DB98D; --green-ink:#7FD9B6; --green-soft:#12332A;
+  --ochre:#D9A042; --ochre-soft:#33280F; --red:#E4796C; --red-soft:#351A17;
+  --blue:#6FA8D6; --blue-soft:#14293A;
+  --on-green:#06201A; --on-green-ink:#06201A;
+  --bar:#0A2F26; --bar-ink:#E6F2EC; --bar-sub:#80B49F; --bar-dim:#B9D6C8;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -16px rgba(0,0,0,.7); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0E1519; --surface:#16212A; --surface-2:#1C2A33; --ink:#E6EDF0; --ink-2:#9DB0BA;
+  --line:#27373F; --green:#3DB98D; --green-ink:#7FD9B6; --green-soft:#12332A;
+  --ochre:#D9A042; --ochre-soft:#33280F; --red:#E4796C; --red-soft:#351A17;
+  --blue:#6FA8D6; --blue-soft:#14293A;
+  --on-green:#06201A; --on-green-ink:#06201A;
+  --bar:#0A2F26; --bar-ink:#E6F2EC; --bar-sub:#80B49F; --bar-dim:#B9D6C8;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -16px rgba(0,0,0,.7); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+button{font:inherit}
+.wrap{width:100%;max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bar)}
+
+/* ---------- barra institucional ---------- */
+.topbar{background:var(--bar);color:var(--bar-ink);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.topbar .wrap{display:flex;align-items:center;gap:14px;padding-block:10px;min-height:60px}
+.escudo{flex:0 0 auto}
+.marca{display:flex;flex-direction:column;min-width:0}
+.marca b{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.01em;line-height:1.15}
+.marca span{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--bar-sub)}
+.topnav{margin-left:auto;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.topnav button{background:transparent;border:1px solid transparent;color:var(--bar-dim);padding:7px 11px;border-radius:7px;cursor:pointer;font-size:14px}
+.topnav button:hover{background:rgba(255,255,255,.12);color:#fff}
+.topnav button[aria-current="true"]{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.22)}
+.whoami{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--bar-dim);border-left:1px solid rgba(255,255,255,.2);padding-left:12px;margin-left:4px}
+.avatar{width:28px;height:28px;border-radius:50%;background:#2E8C6B;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600;font-family:var(--display)}
+.cinta{height:3px;background:linear-gradient(90deg,var(--green) 0 33%,var(--ochre) 33% 66%,var(--blue) 66% 100%)}
+
+main{padding-block:26px 40px}
+.screen[hidden]{display:none!important}
+
+/* ---------- tipografía y bloques ---------- */
+.eyebrow{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);font-weight:600;font-family:var(--display)}
+.h-page{font-size:clamp(22px,3.4vw,30px);font-weight:700;margin-block:6px 4px}
+.sub{color:var(--ink-2);font-size:15px;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.pad{padding:20px}
+.grid{display:grid;gap:14px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.spread{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid transparent;
+  padding:11px 18px;font-family:var(--display);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none}
+.btn:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.btn-pri{background:var(--green);color:var(--on-green)}
+.btn-pri:hover{background:var(--green-ink);color:var(--on-green-ink)}
+.btn-sec{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.btn-sec:hover{background:var(--surface-2)}
+.btn-ghost{background:transparent;color:var(--ink-2);padding:9px 10px}
+.btn-ghost:hover{color:var(--ink)}
+.btn-danger{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn-lg{padding:14px 24px;font-size:16px}
+.btn-block{width:100%}
+
+/* ---------- formularios ---------- */
+label.field{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--ink);min-width:0}
+label.field .hint{font-weight:400;color:var(--ink-2);font-size:13px}
+input[type=text],input[type=number],select,textarea{font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:8px;padding:11px 12px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--green);outline-offset:1px;border-color:var(--green)}
+textarea{resize:vertical;min-height:92px}
+.err{color:var(--red);font-size:13.5px;font-weight:600;display:flex;gap:6px;align-items:flex-start}
+
+/* ---------- pasos ---------- */
+.steps{display:flex;gap:6px;list-style:none;padding:0;margin:0 0 18px;flex-wrap:wrap}
+.steps li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--line);border-radius:999px;padding:6px 13px 6px 7px}
+.steps li b{width:21px;height:21px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);
+  display:grid;place-items:center;font-size:12px;font-family:var(--display)}
+.steps li[data-on="now"]{border-color:var(--green);color:var(--ink);background:var(--green-soft)}
+.steps li[data-on="now"] b{background:var(--green);color:#fff}
+.steps li[data-on="done"] b{background:var(--green-soft);color:var(--green)}
+.steps li[data-on="done"]{color:var(--ink)}
+
+/* ---------- etiquetas de estado ---------- */
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;font-family:var(--display);
+  padding:3px 10px;border-radius:999px;border:1px solid}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.t-green{color:var(--green);background:var(--green-soft);border-color:transparent}
+.t-ochre{color:var(--ochre);background:var(--ochre-soft);border-color:transparent}
+.t-red{color:var(--red);background:var(--red-soft);border-color:transparent}
+.t-blue{color:var(--blue);background:var(--blue-soft);border-color:transparent}
+
+/* ---------- tarjetas de trámite ---------- */
+.tramites{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px}
+.tcard{display:flex;flex-direction:column;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px;cursor:pointer;transition:border-color .15s,transform .15s}
+.tcard:hover{border-color:var(--green);transform:translateY(-2px)}
+.tcard:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.tcard .ic{width:38px;height:38px;border-radius:9px;background:var(--green-soft);color:var(--green);display:grid;place-items:center}
+.tcard h3{font-size:17px;font-weight:600}
+.tcard p{margin:0;color:var(--ink-2);font-size:14px}
+.tcard .go{margin-top:auto;color:var(--green);font-weight:600;font-size:14px;font-family:var(--display)}
+
+/* ---------- tablas ---------- */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14.5px}
+th{font-family:var(--display);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tr.sel{background:var(--green-soft)}
+
+/* ---------- resumen de importe ---------- */
+.importe{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;padding:7px 0}
+.importe.total{border-top:1px solid var(--line);margin-top:6px;padding-top:12px;font-size:19px;font-family:var(--display);font-weight:700}
+.importe span:last-child{font-variant-numeric:tabular-nums}
+
+/* ---------- mapa ---------- */
+.mapbox{position:relative;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface-2);cursor:crosshair}
+.mapbox svg{display:block;width:100%;height:auto;max-width:100%}
+.coords{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+
+/* ---------- línea de tiempo ---------- */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:26px 1fr;gap:12px;padding-bottom:18px;position:relative}
+.tl li::before{content:"";position:absolute;left:12px;top:22px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child{padding-bottom:0}
+.tl li:last-child::before{display:none}
+.tl .dot{width:26px;height:26px;border-radius:50%;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;color:var(--ink-2);font-size:13px}
+.tl li[data-ok="1"] .dot{border-color:var(--green);background:var(--green);color:#fff}
+.tl h4{font-size:15px;font-weight:600}
+.tl p{margin:2px 0 0;color:var(--ink-2);font-size:13.5px}
+
+/* ---------- recibo ---------- */
+.recibo{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.recibo-top{background:var(--bar);color:var(--bar-ink);padding:18px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.recibo-top h3{font-size:18px;color:#fff}
+.recibo-top .mono{color:var(--bar-sub);font-size:13px}
+.recibo-body{padding:20px;display:grid;gap:18px;grid-template-columns:1fr auto;align-items:start}
+@media(max-width:620px){.recibo-body{grid-template-columns:1fr}}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14.5px;margin:0}
+.dl dt{color:var(--ink-2)}
+.dl dd{margin:0;font-weight:600}
+.qrbox{text-align:center;display:grid;gap:7px;justify-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:14px}
+.qrbox canvas{border-radius:4px;background:#fff;padding:6px}
+.qrbox small{color:var(--ink-2);font-size:11.5px;max-width:150px;line-height:1.35}
+
+/* ---------- avisos ---------- */
+.aviso{display:flex;gap:11px;align-items:flex-start;border-radius:9px;padding:13px 15px;font-size:14.5px;border:1px solid}
+.a-green{background:var(--green-soft);border-color:transparent;color:var(--ink)}
+.a-ochre{background:var(--ochre-soft);border-color:transparent;color:var(--ink)}
+.a-blue{background:var(--blue-soft);border-color:transparent;color:var(--ink)}
+.aviso b{font-family:var(--display)}
+
+/* ---------- pasarela ---------- */
+.pasarela{max-width:470px;margin:0 auto}
+.pasarela-top{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#101B24;color:#D7E4EC;padding:12px 16px;border-radius:var(--radius) var(--radius) 0 0;font-size:13px}
+.pasarela-top .lock{display:flex;align-items:center;gap:7px;font-family:var(--display);font-weight:600;color:#fff}
+.pasarela .card{border-radius:0 0 var(--radius) var(--radius);border-top:0}
+.spin{width:38px;height:38px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--green);animation:sp .8s linear infinite;margin:0 auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}.tcard{transition:none}}
+
+/* ---------- bandeja backoffice ---------- */
+.bandeja{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;align-items:start}
+@media(max-width:800px){.bandeja{grid-template-columns:1fr}}
+.exp{display:flex;flex-direction:column;gap:5px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);
+  border-left:4px solid var(--line);border-radius:8px;padding:13px 15px;cursor:pointer}
+.exp:hover{border-color:var(--green)}
+.exp[aria-pressed="true"]{border-color:var(--green);border-left-color:var(--green);background:var(--green-soft)}
+.exp .l1{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.exp .f{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.exp .t{font-weight:600;font-size:15px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:14px}
+.kpi b{display:block;font-family:var(--display);font-size:25px;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi span{color:var(--ink-2);font-size:13px}
+
+.foto-prev{border:1px dashed var(--line);border-radius:9px;padding:14px;text-align:center;color:var(--ink-2);font-size:14px}
+.foto-prev img{max-width:100%;border-radius:7px;margin-top:8px}
+
+.appfoot{border-top:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:13px}
+.appfoot .wrap{padding-block:16px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));
+  background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:600;z-index:50;box-shadow:var(--shadow)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.h-sec{font-size:19px;font-weight:700}
+.hu{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);letter-spacing:.03em}
+.met-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.met{flex:1 1 140px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:600;font-size:14px;cursor:pointer}
+.met[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft)}
+.met:focus-visible,.chip:focus-visible,.cal button:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:13.5px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.bar{height:10px;border-radius:5px;background:var(--surface-2);overflow:hidden;margin-top:5px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:var(--green)}
+.msg{max-width:80%;padding:9px 12px;border-radius:12px;background:var(--surface-2);font-size:14.5px;border:1px solid var(--line)}
+.msg.mio{margin-left:auto;background:var(--green-soft)}
+.msg b{display:block;font-size:12px;color:var(--ink-2);font-family:var(--display);margin-bottom:2px}
+.chatbox{display:flex;flex-direction:column;gap:8px;height:320px;overflow-y:auto;padding:4px}
+.sms{background:var(--blue-soft);border-radius:14px 14px 14px 4px;padding:11px 14px;font-size:14px;max-width:340px}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal div,.cal button{aspect-ratio:1/1;max-width:100%;border-radius:7px;font-size:13.5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--surface);border:1px solid var(--line);color:var(--ink);font-variant-numeric:tabular-nums}
+.cal .dow{background:transparent;border:0;font-family:var(--display);font-size:11.5px;color:var(--ink-2);aspect-ratio:auto;padding:4px 0}
+.cal .vacio{background:transparent;border:0}
+.cal button{cursor:pointer;font-weight:600}
+.cal button::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--ochre)}
+.cal button[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft)}
+ul.anexos{margin:6px 0 0;padding-left:18px;color:var(--ink-2);font-size:13.5px}
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <svg class="escudo" width="34" height="38" viewBox="0 0 34 38" aria-hidden="true">
+      <path d="M17 1.6 32 6.3v13.2c0 8.3-6.1 14.6-15 17.1C8.1 34.1 2 27.8 2 19.5V6.3Z" fill="#2E8C6B" stroke="#9CC6B4" stroke-width="1.6"/>
+      <path d="M17 9.5 23.5 26h-13Z" fill="#EAF4EF" opacity=".92"/>
+      <circle cx="17" cy="21" r="3.4" fill="#2E8C6B"/>
+    </svg>
+    <div class="marca">
+      <b>Municipio de San Rafael del Valle</b>
+      <span>Ventanilla única digital</span>
+    </div>
+    <nav class="topnav" id="nav" hidden aria-label="Navegación principal">
+      <button type="button" data-go="home">Inicio</button>
+      <button type="button" data-go="seguimiento">Mis trámites</button>
+      <button type="button" data-go="backoffice" id="navBack" hidden>BackOffice</button>
+      <div class="whoami">
+        <span class="avatar" id="avatar">JE</span>
+        <span id="whoName">Ciudadano</span>
+        <button type="button" id="btnSalir" title="Cerrar sesión">Salir</button>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="cinta"></div>
+
+<main id="main">
+
+<!-- ===================== LOGIN ===================== -->
+<section class="screen wrap" id="s-login">
+  <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,420px);align-items:center;gap:40px" id="loginGrid">
+    <div>
+      <p class="eyebrow">Gobierno local digital</p>
+      <h1 class="h-page">Haga sus trámites municipales sin ir a la tesorería</h1>
+      <p class="sub">Consulte y pague el impuesto predial, radique solicitudes con folio de seguimiento y reporte incidencias en la vía pública. Atención en línea las 24 horas.</p>
+      <div class="grid" style="gap:10px;margin-top:22px;max-width:520px">
+        <div class="aviso a-green"><b>Épica 1</b><span>Ventanilla única: predial, agua, licencias, multas, radicación con folio, pasarela multibanco y recibo con QR.</span></div>
+        <div class="aviso a-blue"><b>Épica 3</b><span>Ciudad digital: perfil, foros, encuestas, directorio PyME, chat, alertas SMS, reportes en el mapa y agenda.</span></div>
+      </div>
+    </div>
+    <div class="card pad">
+      <h2 style="font-size:19px">Ingresar</h2>
+      <p class="sub" style="font-size:14px;margin-top:4px">Prototipo de demostración. Elija con qué perfil desea entrar.</p>
+      <div class="grid" style="gap:12px;margin-top:16px">
+        <label class="field">Documento de identidad
+          <input type="text" id="inpDoc" value="1.013.604.882" autocomplete="off">
+        </label>
+        <label class="field">Contraseña
+          <input type="text" id="inpPass" value="••••••••" autocomplete="off">
+        </label>
+        <button class="btn btn-pri btn-lg btn-block" type="button" id="btnEntraCiu">Entrar como ciudadano</button>
+        <button class="btn btn-sec btn-block" type="button" id="btnEntraSp">Entrar como servidor público</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOME ===================== -->
+<section class="screen wrap" id="s-home" hidden>
+  <p class="eyebrow">Ventanilla única</p>
+  <h1 class="h-page" id="saludo">Buen día, José Antonio</h1>
+  <p class="sub">Seleccione el trámite que desea realizar. Todos los trámites generan folio de seguimiento.</p>
+
+  <div class="aviso a-ochre" style="margin:18px 0" id="avisoAdeudo">
+    <b>Aviso</b>
+    <span>Tiene <b>2 bimestres de predial pendientes</b> por el predio 05-021-0147-003. El plazo para pagar sin recargo adicional vence el 31 de octubre.</span>
+  </div>
+
+  <div class="spread" style="margin-top:24px"><h2 class="h-sec">Ventanilla única</h2><span class="tag t-blue">Épica 1 · HU-01 a HU-08</span></div>
+  <p class="sub" style="font-size:14px;margin-top:4px">Todos los pagos pasan por la pasarela multibanco (HU-08) y entregan un recibo oficial con sello y código QR (HU-07).</p>
+  <div class="tramites" style="margin-top:12px">
+    <button class="tcard" type="button" data-go="predial1">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v9H4Z M10 20v-6h4v6"/></svg></span><span class="hu">HU-01</span></span>
+      <h3>Impuesto predial</h3>
+      <p>Consulte el adeudo de su predio y páguelo en línea.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="agua">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 5 6 7.6 6 10a6 6 0 0 1-12 0c0-2.4 2-5 6-10Z"/></svg></span><span class="hu">HU-02</span></span>
+      <h3>Agua y alcantarillado</h3>
+      <p>Revise su consumo y pague el recibo de agua.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="licfun">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1-4H5Z M5 9v11h14V9 M9 20v-6h6v6"/></svg></span><span class="hu">HU-03</span></span>
+      <h3>Licencia de funcionamiento</h3>
+      <p>Solicite y pague la licencia de su negocio.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="multas">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l2-6h12l2 6v5H4Z M7 18v2 M17 18v2 M4 13h16"/></svg></span><span class="hu">HU-04</span></span>
+      <h3>Multas de tránsito</h3>
+      <p>Consulte por placa y pague con descuento.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="liccons">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18 M5 21V9l7-5 7 5v12 M9 21v-5h6v5"/></svg></span><span class="hu">HU-05</span></span>
+      <h3>Licencia de construcción</h3>
+      <p>Radique su obra con planos y uso de suelo.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="seguimiento">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z M15.5 15.5 20 20"/></svg></span><span class="hu">HU-06</span></span>
+      <h3>Seguimiento por folio</h3>
+      <p>Vea en qué va cada trámite que radicó.</p>
+      <span class="go">Abrir →</span>
+    </button>
+  </div>
+  <div class="spread" style="margin-top:30px"><h2 class="h-sec">Ciudad digital</h2><span class="tag t-green">Épica 3 · HU-18 a HU-25</span></div>
+  <div class="tramites" style="margin-top:12px">
+    <button class="tcard" type="button" data-go="perfil">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><span class="hu">HU-18</span></span>
+      <h3>Mi perfil</h3>
+      <p>Sus datos, verificación en dos pasos y comunidades.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="foros">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4Z"/></svg></span><span class="hu">HU-19</span></span>
+      <h3>Foros y blog</h3>
+      <p>Pregunte, proponga y lea las noticias del municipio.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="encuestas">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10 M12 20V4 M19 20v-7"/></svg></span><span class="hu">HU-20</span></span>
+      <h3>Encuestas</h3>
+      <p>Vote en las consultas abiertas y vea los resultados.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="directorio">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16 M6 7V4h12v3 M5 7l1 13h12l1-13"/></svg></span><span class="hu">HU-21</span></span>
+      <h3>Directorio PyME</h3>
+      <p>Negocios locales y registro del suyo.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="chat">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h12v8H7l-4 3Z M9 17h8l4 3v-9h-3"/></svg></span><span class="hu">HU-22</span></span>
+      <h3>Salas de chat</h3>
+      <p>Converse con vecinos por tema.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="alertas">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4Z M10 20a2 2 0 0 0 4 0"/></svg></span><span class="hu">HU-23</span></span>
+      <h3>Alertas</h3>
+      <p>Avisos de emergencia y suscripción por SMS.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="inc1">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.3 0 6 2.6 6 5.9C18 13.3 12 19 12 19S6 13.3 6 8.9C6 5.6 8.7 3 12 3Z M12 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg></span><span class="hu">HU-24</span></span>
+      <h3>Reportar un problema</h3>
+      <p>Alumbrado, baches o fugas, con ubicación en el mapa.</p>
+      <span class="go">Abrir →</span>
+    </button>
+    <button class="tcard" type="button" data-go="eventos">
+      <span class="spread" style="width:100%"><span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4Z M4 10h16 M8 3v5 M16 3v5"/></svg></span><span class="hu">HU-25</span></span>
+      <h3>Agenda de eventos</h3>
+      <p>Calendario del mes e inscripción a eventos.</p>
+      <span class="go">Abrir →</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ PREDIAL 1: CONSULTA ============ -->
+<section class="screen wrap" id="s-predial1" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-01 · Impuesto predial</p>
+  <h1 class="h-page">Consulte su predio</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="now"><b>1</b>Consulta</li><li><b>2</b>Adeudo</li><li><b>3</b>Pago</li><li><b>4</b>Recibo</li>
+  </ol>
+  <div class="card pad" style="max-width:560px">
+    <div class="grid">
+      <label class="field">Clave catastral
+        <span class="hint">12 dígitos, como aparece en su recibo anterior. Ejemplo: 05-021-0147-003</span>
+        <input type="text" id="inpClave" class="mono" value="05-021-0147-003" autocomplete="off">
+      </label>
+      <div id="errClave" hidden class="err">⚠ <span>No encontramos un predio con esa clave catastral. Verifique los 12 dígitos o use la clave de ejemplo 05-021-0147-003.</span></div>
+      <button class="btn btn-pri btn-lg" type="button" id="btnConsultar">Consultar predio</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREDIAL 2: ADEUDOS ============ -->
+<section class="screen wrap" id="s-predial2" hidden>
+  <button class="btn btn-ghost" type="button" data-go="predial1">← Cambiar predio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-01 · Impuesto predial</p>
+  <h1 class="h-page">Adeudo del predio</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="done"><b>✓</b>Consulta</li><li data-on="now"><b>2</b>Adeudo</li><li><b>3</b>Pago</li><li><b>4</b>Recibo</li>
+  </ol>
+
+  <div class="card pad" style="margin-bottom:16px">
+    <div class="spread">
+      <div>
+        <p class="eyebrow">Predio</p>
+        <h2 style="font-size:19px;margin-top:3px">Calle Morelos 148, Barrio Centro</h2>
+        <p class="mono" style="color:var(--ink-2);font-size:13.5px;margin:4px 0 0">05-021-0147-003 · Uso habitacional</p>
+      </div>
+      <dl class="dl" style="margin:0">
+        <dt>Propietario</dt><dd>José Antonio Espín Molina</dd>
+        <dt>Avalúo fiscal</dt><dd class="num">$412.500,00</dd>
+        <dt>Tasa predial</dt><dd class="num">8,2 por mil</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;margin-bottom:10px">Periodos pendientes</h3>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th style="width:44px"><span class="sr">Seleccionar</span></th><th>Periodo</th><th>Vencimiento</th><th class="r">Impuesto</th><th class="r">Recargo</th><th class="r">Total</th></tr></thead>
+      <tbody id="tbAdeudos"></tbody>
+    </table>
+  </div>
+
+  <div class="card pad" style="margin-top:16px;max-width:430px;margin-left:auto">
+    <div class="importe"><span>Subtotal impuesto</span><span id="sumImp">$0,00</span></div>
+    <div class="importe"><span>Recargos por mora</span><span id="sumRec">$0,00</span></div>
+    <div class="importe"><span>Descuento pago en línea (2%)</span><span id="sumDesc">−$0,00</span></div>
+    <div class="importe total"><span>Total a pagar</span><span id="sumTot">$0,00</span></div>
+    <button class="btn btn-pri btn-lg btn-block" style="margin-top:14px" type="button" id="btnIrPago" disabled>Continuar al pago</button>
+    <p class="sub" style="font-size:13px;margin-top:10px">Seleccione al menos un periodo. El pago se procesa a través de la pasarela bancaria autorizada; el municipio no almacena los datos de su tarjeta.</p>
+  </div>
+</section>
+
+<!-- ============ PREDIAL 3: PAGO ============ -->
+<section class="screen wrap" id="s-predial3" hidden>
+  <button class="btn btn-ghost" type="button" id="btnVolverPago" data-go="predial2">← Volver</button>
+  <p class="eyebrow" style="margin-top:8px" id="pagoEyebrow">Épica 1 · HU-01 · Impuesto predial</p>
+  <h1 class="h-page">Pago en línea</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="done"><b>✓</b>Consulta</li><li data-on="done"><b>✓</b>Adeudo</li><li data-on="now"><b>3</b>Pago</li><li><b>4</b>Recibo</li>
+  </ol>
+
+  <div class="pasarela">
+    <div class="pasarela-top">
+      <span class="lock">🔒 Pasarela bancaria</span>
+      <span>Folio de liquidación <b class="mono" id="folioLiq">—</b></span>
+    </div>
+    <div class="card pad">
+      <div class="aviso a-green" style="margin-bottom:16px">
+        <b>Usted va a pagar</b>
+        <span><b class="num" id="pagoMonto">$0,00</b> por <span id="pagoConcepto">—</span>. Revise el importe antes de confirmar.</span>
+      </div>
+      <div class="met-row" role="group" aria-label="Medio de pago">
+        <button type="button" class="met" id="metTarjeta" aria-pressed="true">Tarjeta de crédito o débito</button>
+        <button type="button" class="met" id="metPse" aria-pressed="false">PSE · débito desde su banco</button>
+      </div>
+      <div class="grid">
+        <div class="grid" id="boxTarjeta">
+        <label class="field">Número de tarjeta
+          <input type="text" id="inpTarjeta" class="mono" inputmode="numeric" placeholder="4512 3300 2211 0098" maxlength="19">
+        </label>
+        <div class="row" style="gap:12px">
+          <label class="field" style="flex:1 1 130px">Vencimiento
+            <input type="text" id="inpVence" class="mono" placeholder="MM/AA" maxlength="5">
+          </label>
+          <label class="field" style="flex:1 1 110px">CVV
+            <input type="text" id="inpCvv" class="mono" inputmode="numeric" placeholder="123" maxlength="4">
+          </label>
+        </div>
+        <label class="field">Nombre en la tarjeta
+          <input type="text" id="inpTitular" placeholder="JOSE A ESPIN MOLINA">
+        </label>
+        </div>
+        <div class="grid" id="boxPse" hidden>
+          <label class="field">Banco
+            <select id="selBanco">
+              <option value="">Seleccione su banco</option>
+              <option value="b1">Banco del Valle</option><option value="b2">Banco Andino</option>
+              <option value="b3">Banco Popular Rural</option><option value="b4">Cooperativa San Rafael</option>
+            </select>
+          </label>
+          <label class="field">Tipo de persona
+            <select id="selPersona"><option>Natural</option><option>Jurídica</option></select>
+          </label>
+          <label class="field">Correo registrado en PSE
+            <input type="text" id="inpPseMail" placeholder="nombre@correo.com">
+          </label>
+          <p class="sub" style="font-size:13px">Lo llevamos a la página de su banco para que autorice el débito.</p>
+        </div>
+        <div id="errPago" hidden class="err">⚠ <span id="errPagoTxt"></span></div>
+        <button class="btn btn-pri btn-lg btn-block" type="button" id="btnPagar">Confirmar pago</button>
+        <button class="btn btn-ghost btn-block" type="button" id="btnLlenar">Usar datos de prueba</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="procesando" hidden style="text-align:center;margin-top:28px">
+    <div class="spin"></div>
+    <p class="sub" style="margin:12px auto 0;text-align:center">Autorizando la transacción con el banco…</p>
+  </div>
+</section>
+
+<!-- ============ PREDIAL 4: RECIBO ============ -->
+<section class="screen wrap" id="s-predial4" hidden>
+  <p class="eyebrow" id="recEyebrow">Épica 1 · HU-01 · Impuesto predial</p>
+  <h1 class="h-page">Pago registrado</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="done"><b>✓</b>Consulta</li><li data-on="done"><b>✓</b>Adeudo</li><li data-on="done"><b>✓</b>Pago</li><li data-on="now"><b>4</b>Recibo</li>
+  </ol>
+
+  <div class="aviso a-green" style="margin-bottom:16px">
+    <b>✓ Listo</b>
+    <span>Su pago fue autorizado y su adeudo quedó actualizado. El recibo ya está disponible y también lo enviamos a su correo registrado.</span>
+  </div>
+
+  <div class="recibo">
+    <div class="recibo-top">
+      <div>
+        <h3>Recibo oficial de pago</h3>
+        <p class="mono" style="margin:3px 0 0">Folio <span id="recFolio">—</span> · Transacción <span id="recTx">—</span></p>
+      </div>
+      <span class="tag t-green" style="background:#2E8C6B;color:#fff">Pagado</span>
+    </div>
+    <div class="recibo-body">
+      <div class="grid" style="gap:14px">
+        <dl class="dl">
+          <dt>Concepto</dt><dd id="recConcepto">—</dd>
+          <dt id="recRef1L">Predio</dt><dd id="recRef1">Calle Morelos 148, Barrio Centro</dd>
+          <dt id="recRef2L">Clave catastral</dt><dd id="recRef2">05-021-0147-003</dd>
+          <dt>Contribuyente</dt><dd>José Antonio Espín Molina</dd>
+          <dt>Fecha y hora</dt><dd id="recFecha">—</dd>
+          <dt>Medio de pago</dt><dd id="recMedio">Tarjeta terminación 0098</dd>
+          <dt>Importe pagado</dt><dd class="num" id="recMonto">—</dd>
+        </dl>
+        <div class="aviso a-blue" style="font-size:13.5px">
+          <b>Validez</b>
+          <span>Documento firmado digitalmente por la Tesorería Municipal. Verifique su autenticidad escaneando el código o capturando el folio en el portal.</span>
+        </div>
+      </div>
+      <div class="qrbox">
+        <canvas id="qr" width="132" height="132"></canvas>
+        <small>Escanee para verificar este recibo</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:16px">
+    <button class="btn btn-sec" type="button" id="btnCopiarFolio">Copiar folio</button>
+    <button class="btn btn-sec" type="button" data-go="seguimiento">Ver mis trámites</button>
+    <button class="btn btn-pri" type="button" data-go="home">Terminar</button>
+  </div>
+</section>
+
+<!-- ============ INCIDENCIA 1: TIPO Y UBICACIÓN ============ -->
+<section class="screen wrap" id="s-inc1" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-24 · Reporte de incidencia</p>
+  <h1 class="h-page">¿Qué desea reportar?</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="now"><b>1</b>Tipo y lugar</li><li><b>2</b>Detalle</li><li><b>3</b>Confirmación</li>
+  </ol>
+
+  <div class="grid" style="gap:18px">
+    <div>
+      <h3 style="font-size:16px;margin-bottom:10px">Categoría</h3>
+      <div class="row" id="catRow"></div>
+    </div>
+    <div>
+      <h3 style="font-size:16px;margin-bottom:6px">Ubicación</h3>
+      <p class="sub" style="font-size:14px;margin-bottom:10px">Toque el punto del mapa donde se encuentra la incidencia. Puede ajustar la dirección después.</p>
+      <div class="mapbox" id="mapbox">
+        <svg id="mapsvg" viewBox="0 0 800 330" role="img" aria-label="Mapa esquemático del centro de San Rafael del Valle">
+          <rect width="800" height="330" fill="#DDE6E0"/>
+          <g stroke="#C6D3CA" stroke-width="1">
+            <path d="M0 60h800M0 130h800M0 200h800M0 270h800M110 0v330M250 0v330M390 0v330M530 0v330M670 0v330"/>
+          </g>
+          <g fill="#CBD8CE">
+            <rect x="120" y="70" width="120" height="50" rx="3"/><rect x="260" y="70" width="120" height="50" rx="3"/>
+            <rect x="400" y="70" width="120" height="50" rx="3"/><rect x="540" y="70" width="120" height="50" rx="3"/>
+            <rect x="120" y="140" width="120" height="50" rx="3"/><rect x="400" y="140" width="120" height="50" rx="3"/>
+            <rect x="540" y="140" width="120" height="50" rx="3"/><rect x="120" y="210" width="120" height="50" rx="3"/>
+            <rect x="260" y="210" width="120" height="50" rx="3"/><rect x="540" y="210" width="120" height="50" rx="3"/>
+          </g>
+          <rect x="260" y="140" width="120" height="50" rx="3" fill="#B6D2BE"/>
+          <text x="320" y="170" text-anchor="middle" font-family="Archivo,sans-serif" font-size="12" fill="#3B5A47">Plaza principal</text>
+          <rect x="400" y="210" width="120" height="50" rx="3" fill="#C2D4E2"/>
+          <text x="460" y="240" text-anchor="middle" font-family="Archivo,sans-serif" font-size="12" fill="#3A566B">Palacio municipal</text>
+          <text x="12" y="54" font-family="IBM Plex Mono,monospace" font-size="11" fill="#7A8C81">Av. Juárez</text>
+          <text x="12" y="124" font-family="IBM Plex Mono,monospace" font-size="11" fill="#7A8C81">C. Morelos</text>
+          <text x="12" y="194" font-family="IBM Plex Mono,monospace" font-size="11" fill="#7A8C81">C. Hidalgo</text>
+          <text x="12" y="264" font-family="IBM Plex Mono,monospace" font-size="11" fill="#7A8C81">C. Allende</text>
+          <g id="pin" hidden>
+            <circle id="pinHalo" cx="0" cy="0" r="16" fill="#0E6B4F" opacity=".18"/>
+            <path id="pinShape" d="M0-26c6.3 0 11.5 5.1 11.5 11.4C11.5 -6 0 4 0 4s-11.5-10-11.5-18.6C-11.5-20.9-6.3-26 0-26Z" fill="#A4650C" stroke="#fff" stroke-width="2"/>
+            <circle id="pinDot" cx="0" cy="-14.5" r="4" fill="#fff"/>
+          </g>
+        </svg>
+      </div>
+      <div class="coords"><span id="coordTxt">Sin ubicación seleccionada</span><span id="dirTxt"></span></div>
+    </div>
+    <div id="errInc1" hidden class="err">⚠ <span>Seleccione una categoría y marque el punto en el mapa para continuar.</span></div>
+    <div><button class="btn btn-pri btn-lg" type="button" id="btnInc2">Continuar</button></div>
+  </div>
+</section>
+
+<!-- ============ INCIDENCIA 2: DETALLE ============ -->
+<section class="screen wrap" id="s-inc2" hidden>
+  <button class="btn btn-ghost" type="button" data-go="inc1">← Volver</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-24 · Reporte de incidencia</p>
+  <h1 class="h-page">Describa la incidencia</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="done"><b>✓</b>Tipo y lugar</li><li data-on="now"><b>2</b>Detalle</li><li><b>3</b>Confirmación</li>
+  </ol>
+  <div class="card pad" style="max-width:620px">
+    <div class="grid">
+      <div class="aviso a-blue" style="font-size:14px"><b id="resumenCat">—</b><span id="resumenDir">—</span></div>
+      <label class="field">Dirección o referencia
+        <input type="text" id="inpDir" placeholder="Calle Morelos con Av. Juárez, frente a la papelería">
+      </label>
+      <label class="field">¿Qué está ocurriendo?
+        <span class="hint">Entre más detalle, más rápido lo atiende el área responsable.</span>
+        <textarea id="inpDesc" placeholder="La luminaria lleva seis noches apagada y la esquina queda completamente oscura."></textarea>
+      </label>
+      <label class="field">Fotografía (opcional)
+        <input type="file" id="inpFoto" accept="image/*">
+      </label>
+      <div class="foto-prev" id="fotoPrev">Sin fotografía adjunta</div>
+      <div id="errInc2" hidden class="err">⚠ <span>Escriba una dirección de referencia y una descripción de al menos 15 caracteres.</span></div>
+      <button class="btn btn-pri btn-lg" type="button" id="btnEnviarInc">Enviar reporte</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCIDENCIA 3: CONFIRMACIÓN ============ -->
+<section class="screen wrap" id="s-inc3" hidden>
+  <p class="eyebrow">Épica 3 · HU-24 · Reporte de incidencia</p>
+  <h1 class="h-page">Reporte recibido</h1>
+  <ol class="steps" style="margin-top:16px">
+    <li data-on="done"><b>✓</b>Tipo y lugar</li><li data-on="done"><b>✓</b>Detalle</li><li data-on="now"><b>3</b>Confirmación</li>
+  </ol>
+  <div class="card pad" style="max-width:620px">
+    <div class="aviso a-green" style="margin-bottom:16px"><b>✓ Folio generado</b><span>Su reporte fue asignado al área responsable. Le notificaremos cada cambio de estado.</span></div>
+    <dl class="dl">
+      <dt>Folio</dt><dd class="mono" id="incFolio">—</dd>
+      <dt>Categoría</dt><dd id="incCat">—</dd>
+      <dt>Ubicación</dt><dd id="incDir">—</dd>
+      <dt>Coordenadas</dt><dd class="mono" id="incCoord">—</dd>
+      <dt>Área responsable</dt><dd id="incArea">—</dd>
+      <dt>Atención estimada</dt><dd id="incSla">—</dd>
+    </dl>
+    <div class="row" style="margin-top:18px">
+      <button class="btn btn-sec" type="button" id="btnCopiarInc">Copiar folio</button>
+      <button class="btn btn-pri" type="button" data-go="seguimiento">Ver seguimiento</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEGUIMIENTO ===================== -->
+<section class="screen wrap" id="s-seguimiento" hidden>
+  <p class="eyebrow">Épica 1 · HU-06 · Seguimiento por folio</p>
+  <h1 class="h-page">Mis trámites y reportes</h1>
+  <p class="sub">Consulte el estado de cada folio. Los cambios que registra el área responsable aparecen aquí al instante.</p>
+  <div class="bandeja" style="margin-top:20px">
+    <div class="grid" style="gap:10px;align-content:start" id="listaFolios"></div>
+    <div class="card pad" id="detalleFolio"><p class="sub">Seleccione un folio para ver su historial.</p></div>
+  </div>
+</section>
+
+<!-- ===================== BACKOFFICE ===================== -->
+<section class="screen wrap" id="s-backoffice" hidden>
+  <p class="eyebrow">BackOffice · Tesorería y servicios públicos</p>
+  <h1 class="h-page">Bandeja de expedientes</h1>
+  <p class="sub">Expedientes asignados a su área. Al aprobar un trámite se registra el asiento contable del ingreso y se emite el documento al ciudadano.</p>
+  <div class="kpis" style="margin:18px 0">
+    <div class="kpi"><b id="kPend">0</b><span>Pendientes de revisión</span></div>
+    <div class="kpi"><b id="kRes">0</b><span>Resueltos hoy</span></div>
+    <div class="kpi"><b id="kRec">$0</b><span>Recaudado hoy</span></div>
+    <div class="kpi"><b id="kInc">0</b><span>Incidencias abiertas</span></div>
+  </div>
+  <div class="bandeja">
+    <div class="grid" style="gap:10px;align-content:start" id="listaExp"></div>
+    <div class="card pad" id="detalleExp"><p class="sub">Seleccione un expediente de la bandeja.</p></div>
+  </div>
+</section>
+
+
+<!-- ===================== ÉPICA 1 · HU-02 AGUA ===================== -->
+<section class="screen wrap" id="s-agua" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-02 · Agua potable y alcantarillado</p>
+  <h1 class="h-page">Pague su recibo de agua</h1>
+  <p class="sub">Consulte el consumo de su toma con el número de contrato y pague los periodos pendientes.</p>
+  <div class="card pad" style="max-width:560px;margin-top:16px">
+    <div class="grid">
+      <label class="field">Número de contrato
+        <span class="hint">Aparece arriba a la derecha en su recibo. Ejemplo: AG-118-204</span>
+        <input type="text" id="inpContrato" class="mono" value="AG-118-204" autocomplete="off">
+      </label>
+      <div id="errAgua" hidden class="err">⚠ <span>No encontramos ese contrato. Revise que tenga el formato AG-000-000 o use el de ejemplo, AG-118-204.</span></div>
+      <button class="btn btn-pri" type="button" id="btnAgua">Consultar consumo</button>
+    </div>
+  </div>
+  <div id="aguaRes" style="margin-top:18px"></div>
+</section>
+
+<!-- ===================== ÉPICA 1 · HU-03 LICENCIA DE FUNCIONAMIENTO ===================== -->
+<section class="screen wrap" id="s-licfun" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-03 · Licencia de funcionamiento</p>
+  <h1 class="h-page">Solicite su licencia de funcionamiento</h1>
+  <p class="sub">Llene los datos del local. El costo se calcula según el giro y la superficie, y lo paga en línea al radicar.</p>
+  <div class="two" style="margin-top:16px">
+    <div class="card pad"><div class="grid">
+      <label class="field">Nombre del establecimiento<input type="text" id="lfNombre" value="Café Plaza"></label>
+      <label class="field">RFC o NIT del titular<input type="text" id="lfRfc" class="mono" value="EIMJ-880412-K21"></label>
+      <label class="field">Giro
+        <select id="lfGiro">
+          <option>Alimentos y bebidas</option><option>Comercio al por menor</option>
+          <option>Servicios profesionales</option><option>Taller o manufactura ligera</option>
+        </select>
+      </label>
+      <label class="field">Dirección del local<input type="text" id="lfDir" value="Plaza principal, local 2"></label>
+      <label class="field">Superficie del local (m²)<input type="number" id="lfM2" value="48" min="1"></label>
+      <div id="errLf" hidden class="err">⚠ <span id="errLfTxt"></span></div>
+    </div></div>
+    <div class="card pad">
+      <h3 style="font-size:16px;margin-bottom:6px">Liquidación de derechos</h3>
+      <div class="importe"><span>Derecho base del giro</span><span id="lfBase">$0,00</span></div>
+      <div class="importe"><span>Superficie (<span id="lfM2t">0</span> m² × $4,50)</span><span id="lfSup">$0,00</span></div>
+      <div class="importe"><span>Inspección de protección civil</span><span>$350,00</span></div>
+      <div class="importe total"><span>Total</span><span id="lfTot">$0,00</span></div>
+      <button class="btn btn-pri btn-lg btn-block" style="margin-top:14px" type="button" id="btnLf">Radicar y pagar</button>
+      <p class="sub" style="font-size:13px;margin-top:10px">La licencia se emite cuando Desarrollo Económico valida la solicitud. La puede seguir con el folio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ÉPICA 1 · HU-04 MULTAS ===================== -->
+<section class="screen wrap" id="s-multas" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-04 · Multas de tránsito</p>
+  <h1 class="h-page">Consulte y pague sus multas</h1>
+  <p class="sub">Busque por placa. Si paga dentro de los 10 días siguientes a la infracción tiene 50 % de descuento.</p>
+  <div class="card pad" style="max-width:560px;margin-top:16px">
+    <div class="grid">
+      <label class="field">Placa del vehículo
+        <span class="hint">Escríbala con o sin guiones. Ejemplo: SRV-482-K</span>
+        <input type="text" id="inpPlaca" class="mono" value="SRV-482-K" autocomplete="off">
+      </label>
+      <div id="errMulta" hidden class="err">⚠ <span>No hay registros para esa placa. Revise los caracteres o use la de ejemplo, SRV-482-K.</span></div>
+      <button class="btn btn-pri" type="button" id="btnMulta">Consultar multas</button>
+    </div>
+  </div>
+  <div id="multaRes" style="margin-top:18px"></div>
+</section>
+
+<!-- ===================== ÉPICA 1 · HU-05 LICENCIA DE CONSTRUCCIÓN ===================== -->
+<section class="screen wrap" id="s-liccons" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 1 · HU-05 · Licencia de construcción y uso de suelo</p>
+  <h1 class="h-page">Solicite su licencia de construcción</h1>
+  <p class="sub">Radique la solicitud con los planos. Desarrollo Urbano revisa el proyecto y el uso de suelo antes de liquidar los derechos.</p>
+  <div class="two" style="margin-top:16px">
+    <div class="card pad">
+      <div class="grid" id="lcForm">
+        <label class="field">Tipo de obra
+          <select id="lcTipo"><option>Obra nueva</option><option>Ampliación</option><option>Remodelación</option><option>Demolición</option></select>
+        </label>
+        <label class="field">Clave catastral del predio<input type="text" id="lcClave" class="mono" value="05-021-0147-003"></label>
+        <label class="field">Dirección de la obra<input type="text" id="lcDir" value="Calle Morelos 148, Barrio Centro"></label>
+        <div class="row" style="gap:12px">
+          <label class="field" style="flex:1 1 140px">Metros cuadrados<input type="number" id="lcM2" value="36" min="1"></label>
+          <label class="field" style="flex:1 1 160px">Uso de suelo
+            <select id="lcUso"><option>Habitacional</option><option>Comercial</option><option>Mixto</option></select>
+          </label>
+        </div>
+        <label class="field">Planos y documentos
+          <span class="hint">PDF o imagen. Puede elegir varios archivos a la vez.</span>
+          <input type="file" id="lcAnexos" accept=".pdf,image/*" multiple>
+        </label>
+        <ul class="anexos" id="lcLista"><li>Sin archivos adjuntos</li></ul>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><input type="checkbox" id="lcDecl" style="margin-top:3px">Declaro que la información y los documentos son verdaderos.</label>
+        <div id="errLc" hidden class="err">⚠ <span id="errLcTxt"></span></div>
+        <button class="btn btn-pri btn-lg" type="button" id="btnLc">Radicar solicitud</button>
+      </div>
+      <div id="lcRes" hidden>
+        <div class="aviso a-green" style="margin-bottom:14px"><b>✓ Solicitud radicada</b><span>Desarrollo Urbano tiene 10 días hábiles para emitir el dictamen. Le avisaremos cada cambio.</span></div>
+        <dl class="dl"><dt>Folio</dt><dd class="mono" id="lcFolio">—</dd><dt>Área</dt><dd>Desarrollo Urbano</dd><dt>Siguiente paso</dt><dd>Revisión técnica de planos</dd></dl>
+        <div class="row" style="margin-top:16px">
+          <button class="btn btn-sec" type="button" id="btnLcOtra">Radicar otra</button>
+          <button class="btn btn-pri" type="button" data-go="seguimiento">Ver seguimiento</button>
+        </div>
+      </div>
+    </div>
+    <div class="card pad">
+      <h3 style="font-size:16px;margin-bottom:8px">Requisitos</h3>
+      <ul class="anexos" style="color:var(--ink);font-size:14.5px;display:grid;gap:6px">
+        <li>Planos arquitectónicos firmados por un profesional</li>
+        <li>Escritura o constancia de propiedad del predio</li>
+        <li>Memoria de cálculo estructural, si la obra supera 60 m²</li>
+      </ul>
+      <hr class="sep">
+      <h3 style="font-size:16px;margin-bottom:8px">Qué sigue</h3>
+      <ul class="tl">
+        <li data-ok="1"><span class="dot">1</span><div><h4>Radicación con folio</h4><p>Inmediata</p></div></li>
+        <li><span class="dot">2</span><div><h4>Revisión de planos y uso de suelo</h4><p>Hasta 10 días hábiles</p></div></li>
+        <li><span class="dot">3</span><div><h4>Pago de derechos y emisión</h4><p>Con el dictamen favorable</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ÉPICA 3 ===================== -->
+<section class="screen wrap" id="s-perfil" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-18 · Perfil, red social y autenticación</p>
+  <h1 class="h-page">Mi perfil</h1>
+  <p class="sub">Sus datos, cómo protege su cuenta y las comunidades del municipio a las que pertenece.</p>
+  <div id="perfilBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-foros" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-19 · Foros y blog</p>
+  <h1 class="h-page">Foros del municipio</h1>
+  <p class="sub">Pregunte, proponga y responda a otros vecinos. Las áreas del municipio contestan con respuesta oficial.</p>
+  <div id="forosBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-encuestas" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-20 · Encuestas y consultas</p>
+  <h1 class="h-page">Encuestas y consultas ciudadanas</h1>
+  <p class="sub">Su voto cuenta una vez por cuenta verificada. Los resultados se publican al momento.</p>
+  <div id="encBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-directorio" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-21 · Directorio PyME</p>
+  <h1 class="h-page">Directorio de negocios locales</h1>
+  <p class="sub">Encuentre comercios y servicios del municipio, o registre el suyo gratis.</p>
+  <div id="dirBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-chat" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-22 · Salas de chat</p>
+  <h1 class="h-page">Salas de conversación</h1>
+  <p class="sub">Converse con vecinos que comparten sus intereses. Las salas son moderadas.</p>
+  <div id="chatBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-alertas" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-23 · Alertas y emergencias</p>
+  <h1 class="h-page">Alertas del municipio</h1>
+  <p class="sub">Avisos de Protección Civil y de los servicios públicos. Puede recibirlos por SMS.</p>
+  <div id="alertBox" style="margin-top:16px"></div>
+</section>
+
+<section class="screen wrap" id="s-eventos" hidden>
+  <button class="btn btn-ghost" type="button" data-go="home">← Volver al inicio</button>
+  <p class="eyebrow" style="margin-top:8px">Épica 3 · HU-25 · Agenda de la alcaldía</p>
+  <h1 class="h-page">Eventos de noviembre</h1>
+  <p class="sub">Elija un día marcado para ver el evento e inscribirse.</p>
+  <div id="evBox" style="margin-top:16px"></div>
+</section>
+
+</main>
+
+<footer class="appfoot">
+  <div class="wrap">
+    <span>Prototipo de alta fidelidad · Plataforma GLD · Municipio ficticio para fines académicos</span>
+    <span>Proyecto Núcleo 2 · Grupo 1 · v2.0</span>
+  </div>
+</footer>
+
+<style>
+@media(max-width:820px){#loginGrid{grid-template-columns:1fr!important;gap:26px!important}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ---------- utilidades ---------- */
+const NF = new Intl.NumberFormat("es-CO",{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt = n => "$" + NF.format(n);
+const hoy = () => new Date();
+const fechaLarga = d => d.toLocaleDateString("es-CO",{day:"2-digit",month:"long",year:"numeric"}) + ", " +
+                        d.toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"});
+const fechaCorta = d => d.toLocaleDateString("es-CO",{day:"2-digit",month:"short",year:"numeric"});
+let seqVU = 4218, seqINC = 1134;
+const folioVU  = () => "VU-2026-00" + (seqVU++);
+const folioINC = () => "INC-2026-00" + (seqINC++);
+
+function toast(msg){
+  const t = document.createElement("div");
+  t.className = "toast"; t.textContent = msg; t.setAttribute("role","status");
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2600);
+}
+function copiar(txt){
+  try{
+    navigator.clipboard.writeText(txt).then(() => toast("Folio copiado"), () => toast("Folio: " + txt));
+  }catch(e){ toast("Folio: " + txt); }
+}
+
+/* ---------- estado ---------- */
+const ESTADO = {
+  rol: "ciudadano",
+  folios: [],
+  seleccion: [],
+  incidencia: {},
+  pago: null,
+  folioActivo: null,
+  expActivo: null
+};
+
+const ADEUDOS = [
+  {id:"b3", per:"Bimestre 3 de 2026 (may–jun)", vence:"31/07/2026", imp:563.75, rec:33.83},
+  {id:"b4", per:"Bimestre 4 de 2026 (jul–ago)", vence:"30/09/2026", imp:563.75, rec:11.28},
+  {id:"b5", per:"Bimestre 5 de 2026 (sep–oct)", vence:"30/11/2026", imp:563.75, rec:0}
+];
+
+const CATEGORIAS = [
+  {id:"alumbrado", nom:"Alumbrado público", area:"Dirección de Servicios Públicos", sla:"5 días hábiles", ic:"M4 13h16M7 13V8a5 5 0 0 1 10 0v5M9 17h6M10 20h4"},
+  {id:"bache",     nom:"Bache o pavimento", area:"Dirección de Obras Públicas",   sla:"10 días hábiles", ic:"M3 17h18M6 17l2-8h8l2 8M9 9V6h6v3"},
+  {id:"basura",    nom:"Recolección de basura", area:"Dirección de Servicios Públicos", sla:"3 días hábiles", ic:"M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13"},
+  {id:"agua",      nom:"Fuga de agua",      area:"Organismo Operador de Agua",    sla:"24 horas", ic:"M12 3c4 5 6 7.6 6 10a6 6 0 0 1-12 0c0-2.4 2-5 6-10Z"},
+  {id:"semaforo",  nom:"Semáforo dañado",   area:"Dirección de Movilidad",        sla:"48 horas", ic:"M9 3h6v18H9zM12 7h.01M12 12h.01M12 17h.01"}
+];
+
+/* folios sembrados: el prototipo abre con datos reales de ejemplo */
+function sembrar(){
+  const d1 = new Date(); d1.setDate(d1.getDate() - 3);
+  const d2 = new Date(); d2.setDate(d2.getDate() - 11);
+  const d3 = new Date(); d3.setDate(d3.getDate() - 9);
+  ESTADO.folios = [
+    { folio:"VU-2026-004097", tipo:"tramite", titulo:"Licencia de funcionamiento", detalle:"Local comercial, Calle Hidalgo 22",
+      estado:"En revisión", color:"t-ochre", fecha:d1, monto:1875.00, solicitante:"Laura Sofía Ramírez Pulido", area:"Desarrollo Económico",
+      hist:[{t:"Radicado en ventanilla única",d:fechaLarga(d1),ok:true},
+            {t:"Pago de derechos confirmado",d:fechaLarga(d1),ok:true},
+            {t:"En revisión del área responsable",d:"En curso",ok:false}] },
+    { folio:"INC-2026-001088", tipo:"incidencia", titulo:"Bache o pavimento", detalle:"Av. Juárez con C. Allende",
+      estado:"Resuelto", color:"t-green", fecha:d2, area:"Dirección de Obras Públicas", solicitante:"José Antonio Espín Molina",
+      hist:[{t:"Reporte recibido",d:fechaLarga(d2),ok:true},
+            {t:"Asignado a cuadrilla 04",d:fechaLarga(d3),ok:true},
+            {t:"Atendido y cerrado",d:fechaLarga(new Date(d3.getTime()+86400000*2)),ok:true}] }
+  ];
+}
+
+/* ---------- navegación ---------- */
+const PANTALLAS = ["login","home","predial1","predial2","predial3","predial4","inc1","inc2","inc3","seguimiento","backoffice",
+  "agua","licfun","multas","liccons","perfil","foros","encuestas","directorio","chat","alertas","eventos"];
+function ir(id){
+  PANTALLAS.forEach(p => { const el = $("#s-" + p); if(el) el.hidden = (p !== id); });
+  $$("#nav button[data-go]").forEach(b => b.setAttribute("aria-current", String(b.dataset.go === id)));
+  window.scrollTo({top:0, behavior:"instant"});
+  if(id === "seguimiento") pintarFolios();
+  if(id === "backoffice")  pintarBandeja();
+  if(id === "predial2")    pintarAdeudos();
+  if(id === "inc1")        pintarCategorias();
+  if(RENDER[id])           RENDER[id]();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-go]");
+  if(b){ ir(b.dataset.go); }
+});
+
+/* ---------- sesión ---------- */
+function entrar(rol){
+  ESTADO.rol = rol;
+  if(!ESTADO.folios.length) sembrar();
+  $("#nav").hidden = false;
+  $("#navBack").hidden = (rol !== "servidor");
+  $("#whoName").textContent = rol === "servidor" ? "Carmen Villalba · Tesorería" : "José Antonio Espín";
+  $("#avatar").textContent = rol === "servidor" ? "CV" : "JE";
+  if(rol === "servidor"){ ir("backoffice"); }
+  else { $("#saludo").textContent = "Buen día, José Antonio"; ir("home"); }
+}
+$("#btnEntraCiu").addEventListener("click", () => entrar("ciudadano"));
+$("#btnEntraSp").addEventListener("click", () => entrar("servidor"));
+$("#btnSalir").addEventListener("click", () => { $("#nav").hidden = true; ir("login"); });
+
+/* ===================== ÉPICA 1 · PREDIAL ===================== */
+$("#btnConsultar").addEventListener("click", () => {
+  const v = $("#inpClave").value.replace(/\D/g, "");
+  const ok = v === "050210147003";
+  $("#errClave").hidden = ok;
+  if(ok){ ESTADO.seleccion = []; ir("predial2"); }
+});
+
+function pintarAdeudos(){
+  const tb = $("#tbAdeudos");
+  tb.innerHTML = "";
+  ADEUDOS.forEach(a => {
+    const tr = document.createElement("tr");
+    const marcado = ESTADO.seleccion.includes(a.id);
+    tr.className = marcado ? "sel" : "";
+    tr.innerHTML =
+      '<td><input type="checkbox" id="ck-' + a.id + '"' + (marcado ? " checked" : "") + ' aria-label="Seleccionar ' + a.per + '"></td>' +
+      '<td>' + a.per + (a.rec > 0 ? ' <span class="tag t-red" style="margin-left:6px">En mora</span>' : '') + '</td>' +
+      '<td class="mono">' + a.vence + '</td>' +
+      '<td class="r">' + fmt(a.imp) + '</td>' +
+      '<td class="r">' + (a.rec ? fmt(a.rec) : "—") + '</td>' +
+      '<td class="r"><b>' + fmt(a.imp + a.rec) + '</b></td>';
+    tb.appendChild(tr);
+    tr.querySelector("input").addEventListener("change", ev => {
+      if(ev.target.checked) ESTADO.seleccion.push(a.id);
+      else ESTADO.seleccion = ESTADO.seleccion.filter(x => x !== a.id);
+      tr.className = ev.target.checked ? "sel" : "";
+      totales();
+    });
+  });
+  totales();
+}
+
+function totales(){
+  const sel = ADEUDOS.filter(a => ESTADO.seleccion.includes(a.id));
+  const imp = sel.reduce((s,a) => s + a.imp, 0);
+  const rec = sel.reduce((s,a) => s + a.rec, 0);
+  const desc = imp * 0.02;
+  const tot = imp + rec - desc;
+  $("#sumImp").textContent = fmt(imp);
+  $("#sumRec").textContent = fmt(rec);
+  $("#sumDesc").textContent = "−" + fmt(desc);
+  $("#sumTot").textContent = fmt(tot);
+  $("#btnIrPago").disabled = sel.length === 0;
+  ESTADO.pago = { imp:imp, rec:rec, desc:desc, tot:tot,
+                  concepto: sel.length === 1 ? sel[0].per : sel.length + " periodos de impuesto predial" };
+}
+
+$("#btnIrPago").addEventListener("click", () => {
+  iniciarPago({ titulo:"Impuesto predial", eyebrow:"Épica 1 · HU-01 · Impuesto predial",
+    concepto:ESTADO.pago.concepto, tot:ESTADO.pago.tot,
+    ref:[["Predio","Calle Morelos 148, Barrio Centro"],["Clave catastral","05-021-0147-003"]],
+    area:"Tesorería Municipal", volver:"predial2" });
+});
+
+$("#btnLlenar").addEventListener("click", () => {
+  $("#inpTarjeta").value = "4512 3300 2211 0098";
+  $("#inpVence").value = "08/29";
+  $("#inpCvv").value = "417";
+  $("#inpTitular").value = "JOSE A ESPIN MOLINA";
+  $("#selBanco").value = "b2";
+  $("#inpPseMail").value = "jaespin@correo.co";
+});
+
+$("#inpTarjeta").addEventListener("input", e => {
+  const v = e.target.value.replace(/\D/g, "").slice(0,16);
+  e.target.value = v.replace(/(.{4})/g, "$1 ").trim();
+});
+$("#inpVence").addEventListener("input", e => {
+  let v = e.target.value.replace(/\D/g, "").slice(0,4);
+  if(v.length > 2) v = v.slice(0,2) + "/" + v.slice(2);
+  e.target.value = v;
+});
+
+function validarPago(){
+  if(METODO === "pse"){
+    if(!$("#selBanco").value) return "Seleccione el banco desde el que va a pagar.";
+    if(!/^\S+@\S+\.\S+$/.test($("#inpPseMail").value.trim())) return "Escriba el correo con el que está registrado en PSE.";
+    return null;
+  }
+  const num = $("#inpTarjeta").value.replace(/\D/g, "");
+  if(num.length !== 16) return "El número de tarjeta debe tener 16 dígitos.";
+  if(!/^\d{2}\/\d{2}$/.test($("#inpVence").value)) return "Escriba el vencimiento con el formato MM/AA.";
+  const mm = parseInt($("#inpVence").value.slice(0,2), 10);
+  if(mm < 1 || mm > 12) return "El mes de vencimiento no es válido.";
+  if($("#inpCvv").value.replace(/\D/g,"").length < 3) return "El CVV debe tener 3 o 4 dígitos.";
+  if($("#inpTitular").value.trim().length < 5) return "Escriba el nombre que aparece en la tarjeta.";
+  return null;
+}
+
+$("#btnPagar").addEventListener("click", () => {
+  const err = validarPago();
+  if(err){ $("#errPagoTxt").textContent = err; $("#errPago").hidden = false; return; }
+  $("#errPago").hidden = true;
+  $(".pasarela").hidden = true;
+  $("#procesando").hidden = false;
+  setTimeout(emitirRecibo, 1700);
+});
+
+function emitirRecibo(){
+  $("#procesando").hidden = true;
+  $(".pasarela").hidden = false;
+  const p = ESTADO.pago;
+  const f = folioVU();
+  const tx = "TX" + Date.now().toString().slice(-9);
+  const d = hoy();
+  const medio = METODO === "pse" ? "PSE · " + (BANCOS[$("#selBanco").value] || "débito bancario")
+                                 : "Tarjeta terminación " + $("#inpTarjeta").value.replace(/\D/g,"").slice(-4);
+  $("#recFolio").textContent = f;
+  $("#recTx").textContent = tx;
+  $("#recConcepto").textContent = p.concepto;
+  $("#recRef1L").textContent = p.ref[0][0]; $("#recRef1").textContent = p.ref[0][1];
+  $("#recRef2L").textContent = p.ref[1][0]; $("#recRef2").textContent = p.ref[1][1];
+  const re = $("#recEyebrow"); if(re) re.textContent = p.eyebrow;
+  $("#recFecha").textContent = fechaLarga(d);
+  $("#recMonto").textContent = fmt(p.tot);
+  $("#recMedio").textContent = medio;
+  try{
+    new QRious({ element: $("#qr"), value: "https://srv.gob/verificar/" + f + "/" + tx, size: 132, level: "M", foreground: "#13212A" });
+  }catch(e){ /* el recibo sigue siendo válido sin el QR dibujado */ }
+  ESTADO.folios.unshift({
+    folio:f, tipo:"tramite", titulo:p.titulo, detalle:p.concepto,
+    estado:"Pago registrado", color:"t-blue", fecha:d, monto:p.tot,
+    solicitante:"José Antonio Espín Molina", area:p.area, tx:tx,
+    hist:[{t:"Liquidación generada",d:fechaLarga(d),ok:true},
+          {t:"Pago autorizado por la pasarela (" + (METODO === "pse" ? "PSE" : "tarjeta") + ")",d:fechaLarga(d),ok:true},
+          {t:"Pendiente de validación en " + p.area,d:"En curso",ok:false}]
+  });
+  if(p.onDone) p.onDone(f);
+  ESTADO.ultimoFolio = f;
+  ir("predial4");
+}
+$("#btnCopiarFolio").addEventListener("click", () => copiar($("#recFolio").textContent));
+
+/* ===================== ÉPICA 3 · INCIDENCIAS ===================== */
+function pintarCategorias(){
+  const row = $("#catRow");
+  if(row.childElementCount) return;
+  CATEGORIAS.forEach(c => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "tcard"; b.style.flex = "1 1 165px"; b.style.minWidth = "165px";
+    b.setAttribute("aria-pressed","false");
+    b.innerHTML = '<span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="' + c.ic + '"/></svg></span>' +
+                  '<h3 style="font-size:15px">' + c.nom + '</h3>' +
+                  '<p style="font-size:13px">' + c.area + '</p>';
+    b.addEventListener("click", () => {
+      ESTADO.incidencia.cat = c;
+      Array.from(row.children).forEach(x => { x.setAttribute("aria-pressed","false"); x.style.borderColor = ""; x.style.background = ""; });
+      b.setAttribute("aria-pressed","true");
+      b.style.borderColor = "var(--green)"; b.style.background = "var(--green-soft)";
+    });
+    row.appendChild(b);
+  });
+}
+
+const CALLES = ["Av. Juárez","C. Morelos","C. Hidalgo","C. Allende"];
+const CRUCES = ["1ª Privada","2ª Privada","Callejón del Carmen","Av. Constitución","C. Reforma","C. Zaragoza"];
+$("#mapbox").addEventListener("click", ev => {
+  const svg = $("#mapsvg");
+  const r = svg.getBoundingClientRect();
+  const x = (ev.clientX - r.left) / r.width * 800;
+  const y = (ev.clientY - r.top) / r.height * 330;
+  const pin = $("#pin");
+  pin.hidden = false;
+  pin.setAttribute("transform", "translate(" + x.toFixed(1) + "," + y.toFixed(1) + ")");
+  const lat = 19.4260 - (y / 330) * 0.0080;
+  const lng = -99.1720 + (x / 800) * 0.0100;
+  const calle = CALLES[Math.min(3, Math.floor(y / 82.5))];
+  const cruce = CRUCES[Math.min(5, Math.floor(x / 133))];
+  ESTADO.incidencia.lat = lat.toFixed(5);
+  ESTADO.incidencia.lng = lng.toFixed(5);
+  ESTADO.incidencia.dir = calle + " con " + cruce;
+  $("#coordTxt").textContent = "lat " + lat.toFixed(5) + "   ·   lng " + lng.toFixed(5);
+  $("#dirTxt").textContent = "≈ " + ESTADO.incidencia.dir;
+});
+
+$("#btnInc2").addEventListener("click", () => {
+  const ok = ESTADO.incidencia.cat && ESTADO.incidencia.lat;
+  $("#errInc1").hidden = ok;
+  if(!ok) return;
+  $("#resumenCat").textContent = ESTADO.incidencia.cat.nom;
+  $("#resumenDir").textContent = "Ubicación marcada: " + ESTADO.incidencia.dir + " (lat " + ESTADO.incidencia.lat + ", lng " + ESTADO.incidencia.lng + ")";
+  $("#inpDir").value = ESTADO.incidencia.dir;
+  ir("inc2");
+});
+
+$("#inpFoto").addEventListener("change", e => {
+  const f = e.target.files && e.target.files[0];
+  const box = $("#fotoPrev");
+  if(!f){ box.textContent = "Sin fotografía adjunta"; return; }
+  const rd = new FileReader();
+  rd.onload = () => { box.innerHTML = "Adjunto: " + f.name + '<img src="' + rd.result + '" alt="Evidencia adjunta">'; };
+  rd.readAsDataURL(f);
+  ESTADO.incidencia.foto = f.name;
+});
+
+$("#btnEnviarInc").addEventListener("click", () => {
+  const dir = $("#inpDir").value.trim();
+  const desc = $("#inpDesc").value.trim();
+  const ok = dir.length > 3 && desc.length >= 15;
+  $("#errInc2").hidden = ok;
+  if(!ok) return;
+  const c = ESTADO.incidencia.cat, d = hoy(), f = folioINC();
+  $("#incFolio").textContent = f;
+  $("#incCat").textContent = c.nom;
+  $("#incDir").textContent = dir;
+  $("#incCoord").textContent = "lat " + ESTADO.incidencia.lat + ", lng " + ESTADO.incidencia.lng;
+  $("#incArea").textContent = c.area;
+  $("#incSla").textContent = c.sla;
+  ESTADO.folios.unshift({
+    folio:f, tipo:"incidencia", titulo:c.nom, detalle:dir, estado:"Recibido", color:"t-ochre",
+    fecha:d, area:c.area, solicitante:"José Antonio Espín Molina", desc:desc,
+    coord:"lat " + ESTADO.incidencia.lat + ", lng " + ESTADO.incidencia.lng, foto:ESTADO.incidencia.foto,
+    hist:[{t:"Reporte recibido",d:fechaLarga(d),ok:true},
+          {t:"Asignado a " + c.area,d:fechaLarga(d),ok:true},
+          {t:"Programación de atención (" + c.sla + ")",d:"En curso",ok:false}]
+  });
+  ir("inc3");
+});
+$("#btnCopiarInc").addEventListener("click", () => copiar($("#incFolio").textContent));
+
+/* ===================== SEGUIMIENTO ===================== */
+function pintarFolios(){
+  const cont = $("#listaFolios");
+  cont.innerHTML = "";
+  ESTADO.folios.forEach(f => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "exp";
+    b.setAttribute("aria-pressed", String(ESTADO.folioActivo === f.folio));
+    b.innerHTML = '<span class="l1"><span class="f">' + f.folio + '</span><span class="tag ' + f.color + '">' + f.estado + '</span></span>' +
+                  '<span class="t">' + f.titulo + '</span>' +
+                  '<span style="color:var(--ink-2);font-size:13.5px">' + f.detalle + ' · ' + fechaCorta(f.fecha) + '</span>';
+    b.addEventListener("click", () => { ESTADO.folioActivo = f.folio; pintarFolios(); detalle(f); });
+    cont.appendChild(b);
+  });
+  const act = ESTADO.folios.find(f => f.folio === ESTADO.folioActivo);
+  if(act) detalle(act);
+}
+
+function detalle(f){
+  const d = $("#detalleFolio");
+  d.innerHTML =
+    '<div class="spread"><div><p class="eyebrow">' + (f.tipo === "tramite" ? "Trámite" : "Incidencia") + '</p>' +
+    '<h3 style="font-size:19px;margin-top:3px">' + f.titulo + '</h3>' +
+    '<p class="mono" style="color:var(--ink-2);font-size:13.5px;margin:4px 0 0">' + f.folio + '</p></div>' +
+    '<span class="tag ' + f.color + '">' + f.estado + '</span></div><hr class="sep">' +
+    '<dl class="dl">' +
+      '<dt>Detalle</dt><dd>' + f.detalle + '</dd>' +
+      '<dt>Área</dt><dd>' + (f.area || "—") + '</dd>' +
+      (f.monto ? '<dt>Importe</dt><dd class="num">' + fmt(f.monto) + '</dd>' : '') +
+      (f.coord ? '<dt>Coordenadas</dt><dd class="mono" style="font-size:13px">' + f.coord + '</dd>' : '') +
+      '<dt>Radicado</dt><dd>' + fechaLarga(f.fecha) + '</dd>' +
+    '</dl><hr class="sep">' +
+    '<h4 style="font-size:14px;margin-bottom:12px">Historial</h4><ul class="tl">' +
+    f.hist.map(h => '<li data-ok="' + (h.ok ? 1 : 0) + '"><span class="dot">' + (h.ok ? "✓" : "•") + '</span>' +
+                    '<div><h4>' + h.t + '</h4><p>' + h.d + '</p></div></li>').join("") +
+    '</ul>';
+}
+
+/* ===================== BACKOFFICE ===================== */
+function pintarBandeja(){
+  const pend = ESTADO.folios.filter(f => f.estado === "Pago registrado" || f.estado === "En revisión" || f.estado === "Recibido");
+  const res  = ESTADO.folios.filter(f => f.estado === "Resuelto" || f.estado === "Aprobado");
+  $("#kPend").textContent = pend.length;
+  $("#kRes").textContent  = res.length;
+  $("#kRec").textContent  = fmt(ESTADO.folios.filter(f => f.monto).reduce((s,f) => s + f.monto, 0));
+  $("#kInc").textContent  = ESTADO.folios.filter(f => f.tipo === "incidencia" && f.estado !== "Resuelto").length;
+
+  const cont = $("#listaExp");
+  cont.innerHTML = "";
+  ESTADO.folios.forEach(f => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "exp";
+    b.setAttribute("aria-pressed", String(ESTADO.expActivo === f.folio));
+    b.innerHTML = '<span class="l1"><span class="f">' + f.folio + '</span><span class="tag ' + f.color + '">' + f.estado + '</span></span>' +
+                  '<span class="t">' + f.titulo + '</span>' +
+                  '<span style="color:var(--ink-2);font-size:13.5px">' + f.solicitante + ' · ' + fechaCorta(f.fecha) + '</span>';
+    b.addEventListener("click", () => { ESTADO.expActivo = f.folio; pintarBandeja(); detalleExp(f); });
+    cont.appendChild(b);
+  });
+  const act = ESTADO.folios.find(f => f.folio === ESTADO.expActivo);
+  if(act) detalleExp(act);
+}
+
+function detalleExp(f){
+  const cerrado = (f.estado === "Resuelto" || f.estado === "Aprobado");
+  const d = $("#detalleExp");
+  d.innerHTML =
+    '<div class="spread"><div><p class="eyebrow">Expediente</p>' +
+    '<h3 style="font-size:19px;margin-top:3px">' + f.titulo + '</h3>' +
+    '<p class="mono" style="color:var(--ink-2);font-size:13.5px;margin:4px 0 0">' + f.folio + '</p></div>' +
+    '<span class="tag ' + f.color + '">' + f.estado + '</span></div><hr class="sep">' +
+    '<dl class="dl">' +
+      '<dt>Solicitante</dt><dd>' + f.solicitante + '</dd>' +
+      '<dt>Detalle</dt><dd>' + f.detalle + '</dd>' +
+      (f.desc ? '<dt>Descripción</dt><dd style="font-weight:400">' + f.desc + '</dd>' : '') +
+      (f.monto ? '<dt>Importe pagado</dt><dd class="num">' + fmt(f.monto) + '</dd>' : '') +
+      (f.tx ? '<dt>Transacción</dt><dd class="mono" style="font-size:13px">' + f.tx + '</dd>' : '') +
+      '<dt>Área</dt><dd>' + (f.area || "—") + '</dd>' +
+    '</dl>' +
+    (cerrado
+      ? '<div class="aviso a-green" style="margin-top:16px"><b>✓ Cerrado</b><span>No hay acciones pendientes sobre este expediente.</span></div>'
+      : '<div class="aviso a-ochre" style="margin-top:16px"><b>Acción requerida</b><span>' +
+        (f.tipo === "tramite"
+          ? 'Al aprobar se registra el asiento contable del ingreso y se emite el documento firmado al ciudadano.'
+          : 'Al cerrar se notifica al ciudadano que la incidencia fue atendida.') +
+        '</span></div>' +
+        '<div class="row" style="margin-top:14px">' +
+        '<button class="btn btn-pri" type="button" id="btnAprobar">' + (f.tipo === "tramite" ? "Aprobar y contabilizar" : "Marcar como atendida") + '</button>' +
+        '<button class="btn btn-danger" type="button" id="btnRechazar">Devolver con observaciones</button></div>');
+
+  const ap = $("#btnAprobar");
+  if(ap) ap.addEventListener("click", () => {
+    const n = hoy();
+    f.hist = f.hist.filter(h => h.ok);
+    if(f.tipo === "tramite"){
+      f.estado = "Aprobado"; f.color = "t-green";
+      f.hist.push({t:"Validado por " + (f.area || "el área responsable"), d:fechaLarga(n), ok:true});
+      if(f.monto) f.hist.push({t:"Asiento contable registrado · partida 4.1.1.01, momento devengado y recaudado", d:fechaLarga(n), ok:true});
+      else f.hist.push({t:"Dictamen técnico favorable del área", d:fechaLarga(n), ok:true});
+      f.hist.push({t:"Documento firmado y notificado al ciudadano", d:fechaLarga(n), ok:true});
+      toast("Aprobado · asiento contable registrado");
+    }else{
+      f.estado = "Resuelto"; f.color = "t-green";
+      f.hist.push({t:"Cuadrilla asignada", d:fechaLarga(n), ok:true});
+      f.hist.push({t:"Atendido y cerrado", d:fechaLarga(n), ok:true});
+      toast("Incidencia cerrada · ciudadano notificado");
+    }
+    pintarBandeja();
+  });
+  const re = $("#btnRechazar");
+  if(re) re.addEventListener("click", () => {
+    f.estado = "Por subsanar"; f.color = "t-red";
+    f.hist = f.hist.filter(h => h.ok);
+    f.hist.push({t:"Devuelto con observaciones al solicitante", d:fechaLarga(hoy()), ok:true});
+    f.hist.push({t:"Esperando subsanación del ciudadano", d:"En curso", ok:false});
+    toast("Expediente devuelto con observaciones");
+    pintarBandeja();
+  });
+}
+
+
+/* ===================== UTILIDAD ===================== */
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===================== ÉPICA 1 · PAGO COMÚN (HU-07 recibo, HU-08 pasarela) ===================== */
+let METODO = "tarjeta";
+const BANCOS = {b1:"Banco del Valle", b2:"Banco Andino", b3:"Banco Popular Rural", b4:"Cooperativa San Rafael"};
+function iniciarPago(p){
+  ESTADO.pago = p;
+  $("#pagoMonto").textContent = fmt(p.tot);
+  $("#pagoConcepto").textContent = p.concepto;
+  $("#folioLiq").textContent = "LQ-2026-" + (70000 + Math.floor(Math.random()*9000));
+  $("#errPago").hidden = true;
+  const bv = $("#btnVolverPago"); if(bv) bv.dataset.go = p.volver;
+  const ey = $("#pagoEyebrow"); if(ey) ey.textContent = p.eyebrow;
+  ir("predial3");
+}
+function metodo(m){
+  METODO = m;
+  $("#metTarjeta").setAttribute("aria-pressed", String(m === "tarjeta"));
+  $("#metPse").setAttribute("aria-pressed", String(m === "pse"));
+  $("#boxTarjeta").hidden = m !== "tarjeta";
+  $("#boxPse").hidden = m !== "pse";
+  $("#errPago").hidden = true;
+}
+$("#metTarjeta").addEventListener("click", () => metodo("tarjeta"));
+$("#metPse").addEventListener("click", () => metodo("pse"));
+
+/* ===================== ÉPICA 1 · HU-02 AGUA ===================== */
+const AGUA = [
+  {id:"a9",  per:"Septiembre 2026", lect:"1.284 → 1.302", m3:18, fijo:42, pag:false},
+  {id:"a10", per:"Octubre 2026",    lect:"1.302 → 1.323", m3:21, fijo:42, pag:false}
+];
+const M3 = 6.8;
+let aguaOk = false, aguaSel = [];
+const cAgua = a => { const c = a.m3*M3, al = c*0.3; return {c, al, t:a.fijo + c + al}; };
+function pintarAgua(){
+  const r = $("#aguaRes");
+  if(!aguaOk){ r.innerHTML = ""; return; }
+  const pend = AGUA.filter(a => !a.pag);
+  const sel = AGUA.filter(a => aguaSel.includes(a.id) && !a.pag);
+  const tot = sel.reduce((s,a) => s + cAgua(a).t, 0);
+  r.innerHTML = `
+  <div class="card pad" style="margin-bottom:14px"><div class="spread">
+    <div><p class="eyebrow">Toma domiciliaria</p><h2 style="font-size:19px;margin-top:3px">Calle Morelos 148, Barrio Centro</h2>
+    <p class="mono" style="color:var(--ink-2);font-size:13.5px;margin:4px 0 0">AG-118-204 · Uso doméstico · Medidor 77-41208</p></div>
+    <span class="tag ${pend.length ? "t-ochre" : "t-green"}">${pend.length ? pend.length + " periodos pendientes" : "Al corriente"}</span>
+  </div></div>
+  <div class="tablebox"><table><thead><tr><th style="width:44px"><span class="sr">Seleccionar</span></th><th>Periodo</th><th>Lectura</th><th class="r">m³</th><th class="r">Cargo fijo</th><th class="r">Consumo</th><th class="r">Alcantarillado</th><th class="r">Total</th></tr></thead><tbody>
+  ${AGUA.map(a => { const v = cAgua(a); const on = aguaSel.includes(a.id) && !a.pag; return `<tr class="${on ? "sel" : ""}">
+    <td>${a.pag ? `<span class="tag t-green">Pagado</span>` : `<input type="checkbox" data-ag="${a.id}" ${on ? "checked" : ""} aria-label="Seleccionar ${a.per}">`}</td>
+    <td>${a.per}</td><td class="mono">${a.lect}</td><td class="r">${a.m3}</td><td class="r">${fmt(a.fijo)}</td><td class="r">${fmt(v.c)}</td><td class="r">${fmt(v.al)}</td><td class="r"><b>${fmt(v.t)}</b></td></tr>`; }).join("")}
+  </tbody></table></div>
+  <div class="card pad" style="margin-top:14px;max-width:430px;margin-left:auto">
+    <div class="importe"><span>Tarifa doméstica</span><span>${fmt(M3)} por m³</span></div>
+    <div class="importe"><span>Alcantarillado</span><span>30 % del consumo</span></div>
+    <div class="importe total"><span>Total a pagar</span><span>${fmt(tot)}</span></div>
+    <button class="btn btn-pri btn-lg btn-block" style="margin-top:12px" type="button" id="btnPagAgua" ${sel.length ? "" : "disabled"}>Continuar al pago</button>
+    <p class="sub" style="font-size:13px;margin-top:8px">${sel.length ? "" : "Seleccione al menos un periodo."}</p>
+  </div>`;
+  r.querySelectorAll("[data-ag]").forEach(x => x.addEventListener("change", () => {
+    const id = x.dataset.ag; aguaSel = x.checked ? aguaSel.concat(id) : aguaSel.filter(z => z !== id); pintarAgua(); }));
+  $("#btnPagAgua").addEventListener("click", () => {
+    const ids = sel.map(a => a.id);
+    iniciarPago({ titulo:"Agua potable y alcantarillado", eyebrow:"Épica 1 · HU-02 · Agua potable y alcantarillado",
+      concepto: sel.length === 1 ? "Agua y alcantarillado, " + sel[0].per.toLowerCase() : "Agua y alcantarillado, " + sel.length + " periodos",
+      tot, ref:[["Contrato","AG-118-204"],["Toma","Calle Morelos 148, Barrio Centro"]], area:"Organismo Operador de Agua", volver:"agua",
+      onDone: () => { AGUA.forEach(a => { if(ids.includes(a.id)) a.pag = true; }); aguaSel = []; } });
+  });
+}
+$("#btnAgua").addEventListener("click", () => {
+  const v = $("#inpContrato").value.toUpperCase().replace(/[\s-]/g, "");
+  aguaOk = v === "AG118204"; $("#errAgua").hidden = aguaOk; pintarAgua();
+});
+
+/* ===================== ÉPICA 1 · HU-03 LICENCIA DE FUNCIONAMIENTO ===================== */
+const GIROS = {"Alimentos y bebidas":1200, "Comercio al por menor":850, "Servicios profesionales":700, "Taller o manufactura ligera":1500};
+function calcLf(){
+  const g = $("#lfGiro").value, m2 = Math.max(0, parseFloat($("#lfM2").value) || 0);
+  const base = GIROS[g], sup = m2*4.5, tot = base + sup + 350;
+  $("#lfBase").textContent = fmt(base); $("#lfSup").textContent = fmt(sup); $("#lfM2t").textContent = m2; $("#lfTot").textContent = fmt(tot);
+  return {g, m2, tot};
+}
+["lfGiro","lfM2"].forEach(i => $("#" + i).addEventListener("input", calcLf));
+$("#btnLf").addEventListener("click", () => {
+  const n = $("#lfNombre").value.trim(), rfc = $("#lfRfc").value.trim(), d = $("#lfDir").value.trim(), c = calcLf();
+  let err = null;
+  if(n.length < 3) err = "Escriba el nombre del establecimiento.";
+  else if(rfc.length < 8) err = "El RFC o NIT debe tener al menos 8 caracteres.";
+  else if(d.length < 5) err = "Escriba la dirección del local.";
+  else if(c.m2 <= 0) err = "La superficie debe ser mayor que cero.";
+  $("#errLf").hidden = !err; if(err){ $("#errLfTxt").textContent = err; return; }
+  iniciarPago({ titulo:"Licencia de funcionamiento", eyebrow:"Épica 1 · HU-03 · Licencia de funcionamiento",
+    concepto:"Licencia de funcionamiento, " + n, tot:c.tot, ref:[["Establecimiento", n + " · " + d],["Giro", c.g + ", " + c.m2 + " m²"]],
+    area:"Desarrollo Económico", volver:"licfun" });
+});
+
+/* ===================== ÉPICA 1 · HU-04 MULTAS ===================== */
+const MULTAS = [
+  {id:"m1", f:"03/10/2026", inf:"Estacionarse en zona prohibida", art:"Art. 42 del Reglamento de Tránsito", lugar:"C. Hidalgo con Morelos", monto:690, pronto:false, pag:false},
+  {id:"m2", f:"18/10/2026", inf:"No respetar el semáforo en rojo", art:"Art. 31 del Reglamento de Tránsito", lugar:"Av. Juárez con Allende", monto:1380, pronto:true, pag:false}
+];
+let multaOk = false, multaSel = [];
+const vMulta = m => m.pronto ? m.monto*0.5 : m.monto;
+function pintarMultas(){
+  const r = $("#multaRes");
+  if(!multaOk){ r.innerHTML = ""; return; }
+  const sel = MULTAS.filter(m => multaSel.includes(m.id) && !m.pag);
+  const tot = sel.reduce((s,m) => s + vMulta(m), 0);
+  r.innerHTML = `
+  <div class="card pad" style="margin-bottom:14px"><div class="spread">
+    <div><p class="eyebrow">Vehículo</p><h2 style="font-size:19px;margin-top:3px">SRV-482-K · Sedán particular 2019</h2>
+    <p style="color:var(--ink-2);font-size:13.5px;margin:4px 0 0">Propietario: José Antonio Espín Molina</p></div>
+    <span class="tag ${MULTAS.some(m => !m.pag) ? "t-red" : "t-green"}">${MULTAS.filter(m => !m.pag).length} multas pendientes</span>
+  </div></div>
+  <div class="grid" style="gap:10px">
+  ${MULTAS.map(m => { const on = multaSel.includes(m.id) && !m.pag; return `
+    <label class="card pad" style="display:flex;gap:14px;align-items:flex-start;cursor:${m.pag ? "default" : "pointer"};${on ? "border-color:var(--green);background:var(--green-soft)" : ""}">
+      ${m.pag ? `<span class="tag t-green">Pagada</span>` : `<input type="checkbox" data-mu="${m.id}" ${on ? "checked" : ""} style="margin-top:4px">`}
+      <span style="flex:1;min-width:0"><span class="spread"><b style="font-size:15.5px">${m.inf}</b><b class="num">${m.pronto ? `<s style="color:var(--ink-2);font-weight:400">${fmt(m.monto)}</s> ` : ""}${fmt(vMulta(m))}</b></span>
+      <span style="display:block;color:var(--ink-2);font-size:13.5px;margin-top:3px">${m.f} · ${m.lugar} · ${m.art}</span>
+      ${m.pronto && !m.pag ? `<span class="tag t-green" style="margin-top:8px">50 % de descuento por pronto pago</span>` : ""}</span>
+    </label>`; }).join("")}
+  </div>
+  <div class="card pad" style="margin-top:14px;max-width:430px;margin-left:auto">
+    <div class="importe total"><span>Total a pagar</span><span>${fmt(tot)}</span></div>
+    <button class="btn btn-pri btn-lg btn-block" style="margin-top:12px" type="button" id="btnPagMulta" ${sel.length ? "" : "disabled"}>Continuar al pago</button>
+  </div>`;
+  r.querySelectorAll("[data-mu]").forEach(x => x.addEventListener("change", () => {
+    const id = x.dataset.mu; multaSel = x.checked ? multaSel.concat(id) : multaSel.filter(z => z !== id); pintarMultas(); }));
+  $("#btnPagMulta").addEventListener("click", () => {
+    const ids = sel.map(m => m.id);
+    iniciarPago({ titulo:"Multas de tránsito", eyebrow:"Épica 1 · HU-04 · Multas de tránsito",
+      concepto: sel.length === 1 ? "Multa: " + sel[0].inf.toLowerCase() : sel.length + " multas de tránsito",
+      tot, ref:[["Placa","SRV-482-K"],["Vehículo","Sedán particular 2019"]], area:"Dirección de Movilidad", volver:"multas",
+      onDone: () => { MULTAS.forEach(m => { if(ids.includes(m.id)) m.pag = true; }); multaSel = []; } });
+  });
+}
+$("#btnMulta").addEventListener("click", () => {
+  const v = $("#inpPlaca").value.toUpperCase().replace(/[\s-]/g, "");
+  multaOk = v === "SRV482K"; $("#errMulta").hidden = multaOk; pintarMultas();
+});
+
+/* ===================== ÉPICA 1 · HU-05 LICENCIA DE CONSTRUCCIÓN ===================== */
+let lcAnexos = [];
+$("#lcAnexos").addEventListener("change", e => {
+  lcAnexos = Array.from(e.target.files || []).map(f => f.name);
+  $("#lcLista").innerHTML = lcAnexos.length ? lcAnexos.map(n => `<li>${esc(n)}</li>`).join("") : "<li>Sin archivos adjuntos</li>";
+});
+$("#btnLc").addEventListener("click", () => {
+  const d = $("#lcDir").value.trim(), m2 = parseFloat($("#lcM2").value) || 0;
+  let err = null;
+  if(d.length < 5) err = "Escriba la dirección de la obra.";
+  else if(m2 <= 0) err = "Indique los metros cuadrados a construir.";
+  else if(!lcAnexos.length) err = "Adjunte al menos los planos arquitectónicos.";
+  else if(!$("#lcDecl").checked) err = "Marque la declaración de veracidad para continuar.";
+  $("#errLc").hidden = !err; if(err){ $("#errLcTxt").textContent = err; return; }
+  const f = folioVU(), dt = hoy(), tipo = $("#lcTipo").value, uso = $("#lcUso").value;
+  ESTADO.folios.unshift({ folio:f, tipo:"tramite", titulo:"Licencia de construcción",
+    detalle: tipo + ", " + m2 + " m², uso " + uso.toLowerCase() + " · " + d, estado:"En revisión", color:"t-ochre", fecha:dt,
+    solicitante:"José Antonio Espín Molina", area:"Desarrollo Urbano",
+    hist:[{t:"Solicitud radicada con " + lcAnexos.length + " documento(s)", d:fechaLarga(dt), ok:true},
+          {t:"Asignada a Desarrollo Urbano", d:fechaLarga(dt), ok:true},
+          {t:"Revisión de planos y uso de suelo (10 días hábiles)", d:"En curso", ok:false}] });
+  $("#lcFolio").textContent = f; $("#lcForm").hidden = true; $("#lcRes").hidden = false;
+  toast("Solicitud radicada con folio " + f);
+});
+$("#btnLcOtra").addEventListener("click", () => { $("#lcRes").hidden = true; $("#lcForm").hidden = false; });
+
+/* ===================== ÉPICA 3 · HU-18 PERFIL ===================== */
+const INTERESES = ["Movilidad","Seguridad","Medio ambiente","Cultura","Deporte","Emprendimiento"];
+const PERFIL = { nombre:"José Antonio Espín Molina", correo:"jaespin@correo.co", tel:"300 412 7781", dos:true,
+  intereses:new Set(["Movilidad","Medio ambiente"]),
+  comunidades:[{n:"Barrio Centro",m:412,yo:true},{n:"Comerciantes del Mercado",m:96,yo:false},{n:"Ciclistas San Rafael",m:233,yo:true},{n:"Padres de familia · Escuela 14",m:158,yo:false}] };
+function pintarPerfil(){
+  const b = $("#perfilBox");
+  b.innerHTML = `<div class="two">
+    <div class="card pad"><div class="grid">
+      <div class="spread"><h3 style="font-size:17px">Datos de la cuenta</h3><span class="tag t-green">Identidad verificada</span></div>
+      <label class="field">Nombre completo<input type="text" id="pfNombre" value="${esc(PERFIL.nombre)}"></label>
+      <label class="field">Correo<input type="text" id="pfCorreo" value="${esc(PERFIL.correo)}"></label>
+      <label class="field">Celular<span class="hint">Lo usamos para las alertas y para el segundo paso de verificación.</span><input type="text" id="pfTel" class="mono" value="${esc(PERFIL.tel)}"></label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:14.5px"><input type="checkbox" id="pfDos" ${PERFIL.dos ? "checked" : ""} style="margin-top:4px"><span><b>Verificación en dos pasos</b><br><span style="color:var(--ink-2)">Al entrar desde un equipo nuevo le enviamos un código por SMS.</span></span></label>
+      <div id="errPf" hidden class="err">⚠ <span id="errPfTxt"></span></div>
+      <button class="btn btn-pri" type="button" id="btnPf">Guardar cambios</button>
+    </div></div>
+    <div class="grid" style="align-content:start">
+      <div class="card pad"><h3 style="font-size:17px;margin-bottom:10px">Mis intereses</h3>
+        <div class="chips">${INTERESES.map(i => `<button type="button" class="chip" data-int="${i}" aria-pressed="${PERFIL.intereses.has(i)}">${i}</button>`).join("")}</div>
+        <p class="sub" style="font-size:13px;margin-top:10px">Le mostramos primero los foros, encuestas y eventos de estos temas.</p></div>
+      <div class="card pad"><h3 style="font-size:17px;margin-bottom:6px">Comunidades</h3>
+        ${PERFIL.comunidades.map((c,k) => `<div class="spread" style="padding:9px 0;${k ? "border-top:1px solid var(--line)" : ""}">
+          <div><b style="font-size:14.5px">${c.n}</b><div style="color:var(--ink-2);font-size:13px">${c.m} miembros${c.yo ? " · usted es miembro" : ""}</div></div>
+          <button type="button" class="btn ${c.yo ? "btn-sec" : "btn-pri"}" style="padding:7px 13px;font-size:13.5px" data-com="${k}">${c.yo ? "Salir" : "Unirme"}</button></div>`).join("")}
+      </div>
+    </div></div>`;
+  b.querySelectorAll("[data-int]").forEach(x => x.addEventListener("click", () => {
+    const i = x.dataset.int; PERFIL.intereses.has(i) ? PERFIL.intereses.delete(i) : PERFIL.intereses.add(i);
+    x.setAttribute("aria-pressed", String(PERFIL.intereses.has(i))); }));
+  b.querySelectorAll("[data-com]").forEach(x => x.addEventListener("click", () => {
+    const c = PERFIL.comunidades[+x.dataset.com]; c.yo = !c.yo; c.m += c.yo ? 1 : -1;
+    toast(c.yo ? "Ahora es miembro de " + c.n : "Salió de " + c.n); pintarPerfil(); }));
+  $("#btnPf").addEventListener("click", () => {
+    const correo = $("#pfCorreo").value.trim(), tel = $("#pfTel").value.replace(/\D/g, "");
+    let err = null;
+    if($("#pfNombre").value.trim().length < 5) err = "Escriba su nombre completo.";
+    else if(!/^\S+@\S+\.\S+$/.test(correo)) err = "El correo debe tener el formato nombre@dominio.com.";
+    else if(tel.length !== 10) err = "El celular debe tener 10 dígitos.";
+    $("#errPf").hidden = !err; if(err){ $("#errPfTxt").textContent = err; return; }
+    PERFIL.nombre = $("#pfNombre").value.trim(); PERFIL.correo = correo; PERFIL.tel = $("#pfTel").value.trim(); PERFIL.dos = $("#pfDos").checked;
+    toast("Perfil actualizado");
+  });
+}
+
+/* ===================== ÉPICA 3 · HU-19 FOROS Y BLOG ===================== */
+const TEMAS = [
+  {cat:"Servicios", t:"¿Por qué no pasó el camión de basura el jueves en Barrio Norte?", a:"María Peña", h:"hace 2 horas", x:"", r:[
+    {a:"Julián Rojas", x:"En mi cuadra tampoco pasó. Ya van dos semanas así."},
+    {a:"Dirección de Servicios Públicos", x:"Cambiamos la ruta por las obras de la Av. Juárez. Desde el 1 de noviembre el camión pasa los viernes a las 7:00.", of:true}]},
+  {cat:"Movilidad", t:"Propuesta: ciclovía los domingos en la calle Hidalgo", a:"Ciclistas San Rafael", h:"ayer", x:"", r:[
+    {a:"Laura Gómez", x:"Me parece bien, pero que avisen con tiempo a los comerciantes de la cuadra."}]},
+  {cat:"Seguridad", t:"Luminarias apagadas en el parque de la calle Allende", a:"Pedro Salas", h:"hace 3 días", x:"", r:[]}
+];
+const POSTS = [
+  {t:"Así va la pavimentación de la Av. Juárez", f:"20 de octubre de 2026", x:"Llevamos el 60 % de la obra. El tramo entre Morelos e Hidalgo se abre al tránsito el 5 de noviembre.", c:14},
+  {t:"Nuevo horario de atención en la tesorería", f:"14 de octubre de 2026", x:"Desde noviembre la ventanilla presencial atiende de 8:00 a 15:00. Los pagos en línea siguen disponibles las 24 horas.", c:6}
+];
+let foroTab = "foros", foroSel = null;
+function pintarForos(){
+  const b = $("#forosBox");
+  const tabs = `<div class="met-row" style="max-width:420px">
+    <button type="button" class="met" data-tab="foros" aria-pressed="${foroTab === "foros"}">Foros</button>
+    <button type="button" class="met" data-tab="blog" aria-pressed="${foroTab === "blog"}">Blog municipal</button></div>`;
+  let html;
+  if(foroTab === "blog"){
+    html = `<div class="grid">${POSTS.map((p,k) => `<article class="card pad"><p class="eyebrow">${p.f}</p>
+      <h3 style="font-size:18px;margin:4px 0 6px">${p.t}</h3><p style="margin:0 0 12px;color:var(--ink-2)">${p.x}</p>
+      <button type="button" class="btn btn-sec" style="padding:7px 13px;font-size:13.5px" data-like="${k}">Me sirvió · ${p.c}</button></article>`).join("")}</div>`;
+  } else if(foroSel === null){
+    html = `<div class="two"><div class="grid" style="gap:10px;align-content:start">${TEMAS.map((t,k) => `<button type="button" class="exp" data-tema="${k}">
+        <span class="l1"><span class="tag t-blue">${t.cat}</span><span class="f">${t.r.length} respuestas</span></span>
+        <span class="t">${esc(t.t)}</span><span style="color:var(--ink-2);font-size:13.5px">${esc(t.a)} · ${t.h}</span></button>`).join("")}</div>
+      <div class="card pad"><h3 style="font-size:16px;margin-bottom:10px">Abrir un tema nuevo</h3><div class="grid">
+        <label class="field">Título<input type="text" id="ftTit" placeholder="Escriba su pregunta o propuesta"></label>
+        <label class="field">Categoría<select id="ftCat"><option>Servicios</option><option>Movilidad</option><option>Seguridad</option><option>Medio ambiente</option></select></label>
+        <label class="field">Mensaje<textarea id="ftTxt" placeholder="Cuente con detalle lo que pasa o lo que propone."></textarea></label>
+        <div id="errFt" hidden class="err">⚠ <span>Escriba un título de al menos 10 caracteres y un mensaje.</span></div>
+        <div><button class="btn btn-pri" type="button" id="btnFt">Publicar tema</button></div></div></div></div>`;
+  } else {
+    const t = TEMAS[foroSel];
+    html = `<button class="btn btn-ghost" type="button" id="btnForoVolver">← Todos los temas</button>
+    <div class="card pad" style="margin-top:8px;max-width:760px"><span class="tag t-blue">${t.cat}</span>
+      <h3 style="font-size:19px;margin:8px 0 4px">${esc(t.t)}</h3><p style="color:var(--ink-2);font-size:13.5px;margin:0">${esc(t.a)} · ${t.h}</p>
+      ${t.x ? `<p style="margin:10px 0 0">${esc(t.x)}</p>` : ""}<hr class="sep">
+      <div class="grid" style="gap:10px">${t.r.length ? t.r.map(r => `<div class="msg" style="max-width:100%;${r.of ? "background:var(--green-soft)" : ""}"><b>${esc(r.a)}${r.of ? " · respuesta oficial" : ""}</b>${esc(r.x)}</div>`).join("") : `<p class="sub">Todavía no hay respuestas. Sea el primero.</p>`}</div>
+      <hr class="sep"><label class="field">Su respuesta<textarea id="frTxt" placeholder="Escriba su respuesta"></textarea></label>
+      <div id="errFr" hidden class="err" style="margin-top:8px">⚠ <span>Escriba al menos unas palabras antes de responder.</span></div>
+      <button class="btn btn-pri" type="button" id="btnFr" style="margin-top:10px">Responder</button></div>`;
+  }
+  b.innerHTML = tabs + html;
+  b.querySelectorAll("[data-tab]").forEach(x => x.addEventListener("click", () => { foroTab = x.dataset.tab; foroSel = null; pintarForos(); }));
+  b.querySelectorAll("[data-like]").forEach(x => x.addEventListener("click", () => { POSTS[+x.dataset.like].c++; pintarForos(); }));
+  b.querySelectorAll("[data-tema]").forEach(x => x.addEventListener("click", () => { foroSel = +x.dataset.tema; pintarForos(); }));
+  const fv = $("#btnForoVolver"); if(fv) fv.addEventListener("click", () => { foroSel = null; pintarForos(); });
+  const ft = $("#btnFt"); if(ft) ft.addEventListener("click", () => {
+    const tt = $("#ftTit").value.trim(), tx = $("#ftTxt").value.trim(), ok = tt.length >= 10 && tx.length > 0;
+    $("#errFt").hidden = ok; if(!ok) return;
+    TEMAS.unshift({cat:$("#ftCat").value, t:tt, x:tx, a:PERFIL.nombre, h:"ahora", r:[]}); foroSel = 0; toast("Tema publicado"); pintarForos(); });
+  const fr = $("#btnFr"); if(fr) fr.addEventListener("click", () => {
+    const tx = $("#frTxt").value.trim(); $("#errFr").hidden = !!tx; if(!tx) return;
+    TEMAS[foroSel].r.push({a:PERFIL.nombre, x:tx}); toast("Respuesta publicada"); pintarForos(); });
+}
+
+/* ===================== ÉPICA 3 · HU-20 ENCUESTAS ===================== */
+const ENCUESTAS = [
+  {q:"¿Qué obra debería priorizar el municipio en 2027?", cierra:"Abierta hasta el 30 de noviembre", voto:null,
+   ops:[["Pavimentar la Av. Juárez",412],["Parque nuevo en Barrio Norte",388],["Ampliar el alumbrado público",296],["Centro de salud en la zona rural",501]]},
+  {q:"¿Está de acuerdo con cerrar la calle Hidalgo los domingos para uso peatonal?", cierra:"Cerrada el 15 de octubre", cerrada:true, voto:null,
+   ops:[["Sí",612],["No",287],["Me es indiferente",104]]}
+];
+function barras(e){
+  const tot = e.ops.reduce((s,o) => s + o[1], 0);
+  return e.ops.map((o,k) => { const p = Math.round(o[1]*100/tot); return `<div style="margin-top:10px">
+    <div class="spread" style="font-size:14.5px"><span>${o[0]}${e.voto === k ? " · <b>su voto</b>" : ""}</span><span class="num">${p} % · ${o[1]}</span></div>
+    <div class="bar"><i style="width:${p}%"></i></div></div>`; }).join("") + `<p class="sub" style="font-size:13px;margin-top:10px">${tot} participaciones</p>`;
+}
+function pintarEncuestas(){
+  const b = $("#encBox");
+  b.innerHTML = `<div class="two">${ENCUESTAS.map((e,k) => `<div class="card pad">
+    <div class="spread"><span class="tag ${e.cerrada ? "t-red" : "t-green"}">${e.cerrada ? "Cerrada" : "Abierta"}</span><span style="color:var(--ink-2);font-size:13px">${e.cierra}</span></div>
+    <h3 style="font-size:18px;margin:10px 0 6px">${e.q}</h3>
+    ${(e.cerrada || e.voto !== null) ? barras(e) : `<div class="grid" style="gap:8px;margin-top:8px">${e.ops.map((o,j) => `<label style="display:flex;gap:10px;align-items:center;font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer"><input type="radio" name="enc${k}" value="${j}">${o[0]}</label>`).join("")}</div>
+      <div id="errEnc${k}" hidden class="err" style="margin-top:8px">⚠ <span>Elija una opción antes de votar.</span></div>
+      <button class="btn btn-pri" type="button" data-votar="${k}" style="margin-top:12px">Votar</button>
+      <p class="sub" style="font-size:13px;margin-top:8px">Los resultados se muestran después de votar.</p>`}
+  </div>`).join("")}</div>`;
+  b.querySelectorAll("[data-votar]").forEach(x => x.addEventListener("click", () => {
+    const k = +x.dataset.votar, r = b.querySelector(`input[name="enc${k}"]:checked`);
+    $("#errEnc" + k).hidden = !!r; if(!r) return;
+    const e = ENCUESTAS[k]; e.voto = +r.value; e.ops[e.voto][1]++; toast("Voto registrado"); pintarEncuestas(); }));
+}
+
+/* ===================== ÉPICA 3 · HU-21 DIRECTORIO PYME ===================== */
+const NEGOCIOS = [
+  {n:"Panadería La Espiga", c:"Alimentos", d:"C. Morelos 52", h:"6:00 a 20:00", t:"312 450 1188"},
+  {n:"Ferretería El Tornillo", c:"Hogar", d:"Av. Juárez 118", h:"8:00 a 18:00", t:"315 220 4471"},
+  {n:"Taller de bicicletas Ruedas", c:"Servicios", d:"C. Allende 9", h:"9:00 a 19:00", t:"301 774 2290"},
+  {n:"Café Plaza", c:"Alimentos", d:"Plaza principal, local 2", h:"7:00 a 21:00", t:"320 118 6605"},
+  {n:"Papelería Sofi", c:"Comercio", d:"C. Hidalgo 31", h:"7:30 a 19:30", t:"310 552 0917"},
+  {n:"Estética Lupita", c:"Servicios", d:"C. Morelos 140", h:"10:00 a 20:00", t:"318 640 3352"}
+];
+let dirCat = "Todas", dirQ = "";
+function pintarDirectorio(){
+  const b = $("#dirBox"), cats = ["Todas","Alimentos","Comercio","Hogar","Servicios"];
+  const lista = NEGOCIOS.filter(x => (dirCat === "Todas" || x.c === dirCat) && (x.n + " " + x.d).toLowerCase().includes(dirQ.toLowerCase()));
+  b.innerHTML = `<div class="two">
+    <div>
+      <label class="field">Buscar<input type="text" id="dirQ" value="${esc(dirQ)}" placeholder="Nombre o dirección"></label>
+      <div class="chips" style="margin:12px 0">${cats.map(c => `<button type="button" class="chip" data-cat="${c}" aria-pressed="${dirCat === c}">${c}</button>`).join("")}</div>
+      <div class="grid" style="gap:10px">${lista.length ? lista.map(x => `<div class="card" style="padding:14px 16px">
+        <div class="spread"><b style="font-size:15.5px">${esc(x.n)}</b><span class="tag ${x.nuevo ? "t-ochre" : "t-blue"}">${x.nuevo ? "En verificación" : esc(x.c)}</span></div>
+        <div style="color:var(--ink-2);font-size:13.5px;margin-top:4px">${esc(x.d)} · ${esc(x.h)}</div>
+        <div class="mono" style="font-size:13px;margin-top:4px">${esc(x.t)}</div></div>`).join("") : `<p class="sub">No hay negocios con ese filtro. Pruebe con otra categoría.</p>`}</div>
+    </div>
+    <div class="card pad"><h3 style="font-size:17px;margin-bottom:4px">Registrar mi negocio</h3>
+      <p class="sub" style="font-size:13.5px;margin-bottom:12px">Es gratis para PyMES del municipio. Lo publicamos cuando Desarrollo Económico verifique los datos.</p>
+      <div class="grid">
+        <label class="field">Nombre del negocio<input type="text" id="ngN"></label>
+        <label class="field">Categoría<select id="ngC"><option>Alimentos</option><option>Comercio</option><option>Hogar</option><option>Servicios</option></select></label>
+        <label class="field">Dirección<input type="text" id="ngD"></label>
+        <label class="field">Horario<input type="text" id="ngH" placeholder="8:00 a 18:00"></label>
+        <label class="field">Teléfono<input type="text" id="ngT" class="mono" placeholder="300 000 0000"></label>
+        <div id="errNg" hidden class="err">⚠ <span id="errNgTxt"></span></div>
+        <button class="btn btn-pri" type="button" id="btnNg">Enviar registro</button>
+      </div></div></div>`;
+  const q = $("#dirQ");
+  q.addEventListener("input", () => { dirQ = q.value; pintarDirectorio(); const n = $("#dirQ"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+  b.querySelectorAll("[data-cat]").forEach(x => x.addEventListener("click", () => { dirCat = x.dataset.cat; pintarDirectorio(); }));
+  $("#btnNg").addEventListener("click", () => {
+    const n = $("#ngN").value.trim(), d = $("#ngD").value.trim(), t = $("#ngT").value.replace(/\D/g, "");
+    let err = null;
+    if(n.length < 3) err = "Escriba el nombre del negocio.";
+    else if(d.length < 5) err = "Escriba la dirección del local.";
+    else if(t.length !== 10) err = "El teléfono debe tener 10 dígitos.";
+    $("#errNg").hidden = !err; if(err){ $("#errNgTxt").textContent = err; return; }
+    NEGOCIOS.unshift({n, c:$("#ngC").value, d, h:$("#ngH").value.trim() || "Horario por confirmar", t:$("#ngT").value.trim(), nuevo:true});
+    dirCat = "Todas"; dirQ = ""; toast("Registro enviado · queda en verificación"); pintarDirectorio();
+  });
+}
+
+/* ===================== ÉPICA 3 · HU-22 SALAS DE CHAT ===================== */
+const SALAS = [
+  {n:"Movilidad", m:[{a:"Carlos M.", x:"¿Alguien sabe hasta cuándo va el cierre de la Av. Juárez?"},{a:"Ana T.", x:"Hasta el 5 de noviembre, lo publicaron en el blog."}], r:["Gracias por el dato.","Yo me desvío por la Allende y llego bien."]},
+  {n:"Seguridad del barrio", m:[{a:"Rosa V.", x:"Anoche el parque de la Allende estaba sin luz otra vez."},{a:"Pedro S.", x:"Ya lo reporté en la aplicación, me dieron folio."}], r:["Bien, así le hacen seguimiento.","Yo también lo reporto, entre más reportes mejor."]},
+  {n:"Emprendedores", m:[{a:"Lucía R.", x:"¿Ya abrieron las inscripciones para la feria del 7?"}], r:["Sí, están en la agenda de eventos.","Me inscribí ayer, quedan pocos cupos."]},
+  {n:"Medio ambiente", m:[{a:"Tomás G.", x:"El 14 hay jornada de reciclaje en la plaza."}], r:["¡Allá nos vemos!","¿Reciben aparatos electrónicos?"]}
+];
+let salaSel = 0;
+function pintarChat(){
+  const b = $("#chatBox"), s = SALAS[salaSel];
+  b.innerHTML = `<div class="bandeja">
+    <div class="grid" style="gap:8px;align-content:start">${SALAS.map((x,k) => `<button type="button" class="exp" data-sala="${k}" aria-pressed="${k === salaSel}">
+      <span class="t"># ${x.n}</span><span style="color:var(--ink-2);font-size:13px">${x.m.length} mensajes</span></button>`).join("")}</div>
+    <div class="card pad"><div class="spread"><h3 style="font-size:17px"># ${s.n}</h3><span class="tag t-green">${23 + salaSel*7} vecinos en línea</span></div><hr class="sep">
+      <div class="chatbox" id="chatMsgs">${s.m.map(m => `<div class="msg ${m.yo ? "mio" : ""}"><b>${esc(m.a)}</b>${esc(m.x)}</div>`).join("")}</div>
+      <div class="row" style="margin-top:12px;flex-wrap:nowrap"><input type="text" id="chatIn" placeholder="Escriba un mensaje" style="flex:1"><button class="btn btn-pri" type="button" id="chatSend">Enviar</button></div>
+      <p class="sub" style="font-size:12.5px;margin-top:8px">Sala moderada. Los mensajes ofensivos se retiran según las reglas de convivencia.</p>
+    </div></div>`;
+  const box = $("#chatMsgs"); box.scrollTop = box.scrollHeight;
+  b.querySelectorAll("[data-sala]").forEach(x => x.addEventListener("click", () => { salaSel = +x.dataset.sala; pintarChat(); }));
+  const enviar = () => {
+    const t = $("#chatIn").value.trim(); if(!t) return;
+    s.m.push({a:"Usted", x:t, yo:true}); const k = salaSel; pintarChat(); $("#chatIn").focus();
+    setTimeout(() => { const sa = SALAS[k]; sa.m.push({a:["Marta L.","Iván P.","Sofía C.","Raúl D."][sa.m.length % 4], x:sa.r[sa.m.length % sa.r.length]});
+      if(salaSel === k && !$("#s-chat").hidden) pintarChat(); }, 1400);
+  };
+  $("#chatSend").addEventListener("click", enviar);
+  $("#chatIn").addEventListener("keydown", e => { if(e.key === "Enter") enviar(); });
+}
+
+/* ===================== ÉPICA 3 · HU-23 ALERTAS SMS ===================== */
+const ALERTAS = [
+  {s:"alta", t:"Lluvias fuertes esta noche", x:"Protección Civil recomienda no cruzar el arroyo de la calle Allende entre las 20:00 y las 6:00.", h:"Hoy, 14:10"},
+  {s:"media", t:"Corte de agua programado", x:"Barrio Centro, mañana de 9:00 a 13:00 por mantenimiento de la red.", h:"Hoy, 9:30"},
+  {s:"baja", t:"Vacunación antirrábica gratuita", x:"Sábado en el Palacio municipal, de 8:00 a 14:00.", h:"Ayer"}
+];
+const TIPOS_AL = ["Clima y emergencias","Cortes de agua y luz","Seguridad","Eventos del municipio"];
+const SUSC = {tel:"300 412 7781", tipos:new Set(["Clima y emergencias","Cortes de agua y luz"]), activa:false};
+function pintarAlertas(){
+  const b = $("#alertBox"), col = {alta:"var(--red)", media:"var(--ochre)", baja:"var(--blue)"},
+        lbl = {alta:"Emergencia", media:"Aviso", baja:"Información"}, tg = {alta:"t-red", media:"t-ochre", baja:"t-blue"};
+  b.innerHTML = `<div class="two">
+    <div class="grid" style="gap:10px;align-content:start"><h3 style="font-size:17px">Alertas activas</h3>
+      ${ALERTAS.map(a => `<div class="card" style="border-left:5px solid ${col[a.s]};padding:14px 16px">
+        <div class="spread"><span class="tag ${tg[a.s]}">${lbl[a.s]}</span><span style="color:var(--ink-2);font-size:13px">${a.h}</span></div>
+        <b style="display:block;font-size:15.5px;margin-top:8px">${a.t}</b><p style="margin:4px 0 0;color:var(--ink-2);font-size:14px">${a.x}</p></div>`).join("")}</div>
+    <div class="card pad"><h3 style="font-size:17px;margin-bottom:4px">Recibir alertas por SMS</h3>
+      <p class="sub" style="font-size:13.5px;margin-bottom:12px">Le escribimos solo por los temas que elija. Es gratis.</p>
+      <div class="grid">
+        <label class="field">Celular<input type="text" id="alTel" class="mono" value="${esc(SUSC.tel)}"></label>
+        <div class="grid" style="gap:8px">${TIPOS_AL.map(t => `<label style="display:flex;gap:10px;align-items:center;font-size:14.5px"><input type="checkbox" data-tipo="${t}" ${SUSC.tipos.has(t) ? "checked" : ""}>${t}</label>`).join("")}</div>
+        <div id="errAl" hidden class="err">⚠ <span id="errAlTxt"></span></div>
+        <button class="btn btn-pri" type="button" id="btnAl">${SUSC.activa ? "Actualizar suscripción" : "Suscribirme"}</button>
+        ${SUSC.activa ? `<div><div class="aviso a-green" style="margin-bottom:12px"><b>✓ Suscrito</b><span>Recibirá alertas al ${esc(SUSC.tel)}.</span></div>
+          <p class="eyebrow" style="margin-bottom:6px">Así le llegan los mensajes</p>
+          <div class="sms"><b>SRV Alertas</b><br>${ALERTAS[0].t}. ${ALERTAS[0].x} Responda BAJA para cancelar.</div></div>` : ""}
+      </div></div></div>`;
+  b.querySelectorAll("[data-tipo]").forEach(x => x.addEventListener("change", () => { x.checked ? SUSC.tipos.add(x.dataset.tipo) : SUSC.tipos.delete(x.dataset.tipo); }));
+  $("#btnAl").addEventListener("click", () => {
+    const t = $("#alTel").value.replace(/\D/g, "");
+    let err = null;
+    if(t.length !== 10) err = "El celular debe tener 10 dígitos.";
+    else if(!SUSC.tipos.size) err = "Elija al menos un tipo de alerta.";
+    $("#errAl").hidden = !err; if(err){ $("#errAlTxt").textContent = err; return; }
+    SUSC.tel = $("#alTel").value.trim(); SUSC.activa = true; toast("Suscripción guardada"); pintarAlertas();
+  });
+}
+
+/* ===================== ÉPICA 3 · HU-25 AGENDA DE EVENTOS ===================== */
+const EVENTOS = [
+  {d:7,  t:"Feria de emprendedores", l:"Plaza principal", h:"10:00 a 18:00", cupo:80, ins:52, yo:false},
+  {d:14, t:"Jornada de reciclaje", l:"Plaza principal", h:"8:00 a 13:00", cupo:120, ins:64, yo:false},
+  {d:20, t:"Cabildo abierto: presupuesto 2027", l:"Palacio municipal", h:"18:00", cupo:150, ins:97, yo:false},
+  {d:28, t:"Carrera atlética 5K", l:"Salida en la Av. Juárez", h:"7:00", cupo:300, ins:211, yo:false}
+];
+let evSel = 20;
+function pintarEventos(){
+  const b = $("#evBox"), y = 2026, m = 10;
+  const first = new Date(y, m, 1).getDay(), dias = new Date(y, m + 1, 0).getDate();
+  let cal = ["D","L","M","M","J","V","S"].map(d => `<div class="dow">${d}</div>`).join("");
+  for(let i = 0; i < first; i++) cal += `<div class="vacio"></div>`;
+  for(let d = 1; d <= dias; d++){
+    const ev = EVENTOS.find(e => e.d === d);
+    cal += ev ? `<button type="button" data-dia="${d}" aria-pressed="${evSel === d}" aria-label="${d} de noviembre, ${ev.t}">${d}</button>` : `<div>${d}</div>`;
+  }
+  const e = EVENTOS.find(x => x.d === evSel);
+  b.innerHTML = `<div class="two">
+    <div class="card pad"><div class="spread" style="margin-bottom:10px"><h3 style="font-size:17px">Noviembre 2026</h3><span style="color:var(--ink-2);font-size:13px"><span style="color:var(--ochre)">●</span> día con evento</span></div>
+      <div class="cal">${cal}</div></div>
+    <div class="grid" style="align-content:start">
+      ${e ? `<div class="card pad"><p class="eyebrow">${e.d} de noviembre · ${e.h}</p><h3 style="font-size:19px;margin:6px 0">${e.t}</h3><p style="margin:0;color:var(--ink-2)">${e.l}</p>
+        <div class="bar" style="margin-top:14px"><i style="width:${Math.round(e.ins*100/e.cupo)}%"></i></div>
+        <p class="sub" style="font-size:13px;margin-top:6px">${e.ins} de ${e.cupo} cupos ocupados</p>
+        <button class="btn ${e.yo ? "btn-sec" : "btn-pri"}" type="button" id="btnEv" style="margin-top:12px">${e.yo ? "Cancelar inscripción" : "Inscribirme"}</button>
+        ${e.yo ? `<div class="aviso a-green" style="margin-top:12px"><b>✓ Inscrito</b><span>Le enviaremos un recordatorio por SMS el día anterior.</span></div>` : ""}</div>` : ""}
+      <div class="card pad"><h3 style="font-size:16px;margin-bottom:2px">Todos los eventos del mes</h3>
+        ${EVENTOS.map(x => `<button type="button" class="exp" data-dia="${x.d}" style="margin-top:8px" aria-pressed="${evSel === x.d}">
+          <span class="l1"><span class="t">${x.t}</span><span class="f">${x.d} nov</span></span><span style="color:var(--ink-2);font-size:13px">${x.l}${x.yo ? " · inscrito" : ""}</span></button>`).join("")}</div>
+    </div></div>`;
+  b.querySelectorAll("[data-dia]").forEach(x => x.addEventListener("click", () => { evSel = +x.dataset.dia; pintarEventos(); }));
+  const be = $("#btnEv"); if(be) be.addEventListener("click", () => {
+    e.yo = !e.yo; e.ins += e.yo ? 1 : -1; toast(e.yo ? "Inscripción confirmada" : "Inscripción cancelada"); pintarEventos(); });
+}
+
+/* ===================== MAPA DE PANTALLAS QUE SE PINTAN AL ENTRAR ===================== */
+const RENDER = { agua:pintarAgua, multas:pintarMultas, licfun:calcLf, perfil:pintarPerfil, foros:pintarForos,
+  encuestas:pintarEncuestas, directorio:pintarDirectorio, chat:pintarChat, alertas:pintarAlertas, eventos:pintarEventos };
+
+/* ---------- arranque ---------- */
+sembrar();
+ir("login");
+})();
+</script>
+
+</body></html>
